@@ -1,0 +1,1885 @@
+2012-01-16 11:07:22: (message) Key file contains key 'admin-lua-script' which has value that cannot be interpreted.
+2012-01-16 11:08:24: (message) Key file contains key 'admin-lua-script' which has value that cannot be interpreted.
+2012-01-16 11:10:58: (message) Key file contains key 'admin-lua-script' which has value that cannot be interpreted.
+2012-01-16 11:12:11: (message) Key file contains key 'admin-lua-script' which has value that cannot be interpreted.
+2012-01-16 11:13:52: (message) Key file contains key 'admin-lua-script' which has value that cannot be interpreted.
+2012-01-16 11:16:03: (message) MySQL Server 5.5.15 started
+2012-01-16 11:16:03: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 11:16:03: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 11:16:03: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 11:17:33: (message) CON_STATE_INIT
+
+2012-01-16 11:17:33: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 11:17:33: (message) CON_STATE_READ_AUTH
+
+2012-01-16 11:17:53: (message) CON_STATE_COLSE
+
+2012-01-16 11:18:57: (message) MySQL Server 5.5.15 started
+2012-01-16 11:18:59: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 11:18:59: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 11:18:59: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 11:19:50: (message) MySQL Server 5.5.15 started
+2012-01-16 11:20:43: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 11:20:43: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 11:20:43: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 11:21:07: (message) CON_STATE_INIT
+
+2012-01-16 11:21:30: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 11:21:46: (message) CON_STATE_READ_AUTH
+
+2012-01-16 11:21:46: (message) CON_STATE_COLSE
+
+2012-01-16 11:21:59: (message) CON_STATE_INIT
+
+2012-01-16 11:21:59: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 11:22:03: (message) CON_STATE_READ_AUTH
+
+2012-01-16 11:22:05: (message) last message repeated 1 times
+2012-01-16 11:22:05: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 11:22:05: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:22:05: (message) last message repeated 1 times
+2012-01-16 11:22:05: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:22:05: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:22:20: (message) last message repeated 1 times
+2012-01-16 11:22:20: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:22:20: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:22:26: (message) last message repeated 1 times
+2012-01-16 11:22:26: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:22:26: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:23:18: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:23:18: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:23:18: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:23:49: (message) MySQL Server 5.5.15 started
+2012-01-16 11:27:30: (message) MySQL Server 5.5.15 started
+2012-01-16 11:27:30: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 11:27:30: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 11:27:30: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 11:27:52: (message) MySQL Server 5.5.15 started
+2012-01-16 11:27:56: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 11:27:56: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 11:27:56: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 11:28:10: (message) CON_STATE_INIT
+
+2012-01-16 11:28:10: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 11:28:10: (message) CON_STATE_READ_AUTH
+
+2012-01-16 11:28:10: (message) last message repeated 1 times
+2012-01-16 11:28:10: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 11:28:10: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:28:42: (message) last message repeated 1 times
+2012-01-16 11:28:42: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:28:42: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:30:07: (message) last message repeated 1 times
+2012-01-16 11:30:07: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:30:07: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:31:02: (message) last message repeated 1 times
+2012-01-16 11:31:02: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:31:02: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:32:28: (message) last message repeated 1 times
+2012-01-16 11:32:28: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:32:28: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:34:12: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:35:40: (critical) plugins\admin\admin-plugin.c:382: Reload IP-address has to be in the form [<ip>][:<port>], is '127.0.0.1:3307')'. Failed to parse the port at '')'
+2012-01-16 11:35:40: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:35:40: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:36:03: (message) last message repeated 1 times
+2012-01-16 11:36:03: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:36:03: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:36:10: (message) last message repeated 1 times
+2012-01-16 11:36:10: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:36:10: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:38:11: (message) MySQL Server 5.5.15 started
+2012-01-16 11:38:15: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 11:38:15: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 11:38:15: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 11:38:20: (message) CON_STATE_INIT
+
+2012-01-16 11:38:20: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 11:38:20: (message) CON_STATE_READ_AUTH
+
+2012-01-16 11:38:20: (message) last message repeated 1 times
+2012-01-16 11:38:20: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 11:38:20: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:38:57: (message) MySQL Server 5.5.15 started
+2012-01-16 11:39:02: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 11:39:02: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 11:39:02: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 11:39:13: (message) CON_STATE_INIT
+
+2012-01-16 11:39:13: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 11:39:13: (message) CON_STATE_READ_AUTH
+
+2012-01-16 11:39:13: (message) last message repeated 1 times
+2012-01-16 11:39:13: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 11:39:13: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:42:15: (message) last message repeated 1 times
+2012-01-16 11:42:15: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 11:43:08: (message) CON_STATE_READ_QUERY
+
+2012-01-16 11:43:46: (message) CON_STATE_COLSE
+
+2012-01-16 12:19:31: (message) MySQL Server 5.5.15 started
+2012-01-16 12:19:31: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 12:19:31: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 12:19:31: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 12:20:42: (message) CON_STATE_INIT
+
+2012-01-16 12:20:42: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 12:20:42: (message) CON_STATE_READ_AUTH
+
+2012-01-16 12:20:42: (message) last message repeated 1 times
+2012-01-16 12:20:42: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 12:20:42: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:20:43: (message) last message repeated 1 times
+2012-01-16 12:20:43: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 12:20:43: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:21:29: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:21:57: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 12:21:57: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:22:17: (message) last message repeated 1 times
+2012-01-16 12:22:17: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 2
+2012-01-16 12:22:21: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 12:22:21: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:22:36: (message) last message repeated 1 times
+2012-01-16 12:22:36: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 3
+2012-01-16 12:22:36: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 12:22:36: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:22:48: (message) last message repeated 1 times
+2012-01-16 12:22:48: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 4
+2012-01-16 12:23:14: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 12:23:14: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:23:19: (message) last message repeated 1 times
+2012-01-16 12:23:19: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 5
+2012-01-16 12:23:47: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 12:23:47: (message) CON_STATE_READ_QUERY
+
+2012-01-16 12:23:59: (message) last message repeated 1 times
+2012-01-16 12:23:59: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 6
+2012-01-16 13:07:16: (message) MySQL Server 5.5.15 started
+2012-01-16 13:07:16: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 13:07:16: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 13:07:16: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 13:07:21: (message) CON_STATE_INIT
+
+2012-01-16 13:07:21: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 13:07:21: (message) CON_STATE_READ_AUTH
+
+2012-01-16 13:07:21: (message) last message repeated 1 times
+2012-01-16 13:07:21: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 13:07:21: (message) CON_STATE_READ_QUERY
+
+2012-01-16 13:07:24: (message) last message repeated 1 times
+2012-01-16 13:07:24: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 13:07:24: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:18:44: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:18:44: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 2
+2012-01-16 14:18:54: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:18:54: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:24:15: (message) MySQL Server 5.5.15 started
+2012-01-16 14:24:15: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 14:24:15: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 14:24:15: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 14:24:29: (message) CON_STATE_INIT
+
+2012-01-16 14:24:29: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 14:24:29: (message) CON_STATE_READ_AUTH
+
+2012-01-16 14:24:29: (message) last message repeated 1 times
+2012-01-16 14:24:29: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:24:29: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:24:29: (message) last message repeated 1 times
+2012-01-16 14:24:29: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:24:29: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:24:37: (message) last message repeated 1 times
+2012-01-16 14:24:37: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:24:37: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:24:43: (message) last message repeated 1 times
+2012-01-16 14:24:43: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:24:43: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:24:52: (message) last message repeated 1 times
+2012-01-16 14:24:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:24:52: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:25:06: (message) last message repeated 1 times
+2012-01-16 14:25:06: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 2
+2012-01-16 14:25:06: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:25:06: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:25:09: (message) last message repeated 1 times
+2012-01-16 14:25:09: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 3
+2012-01-16 14:25:09: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:25:09: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:25:17: (message) last message repeated 1 times
+2012-01-16 14:25:17: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 4
+2012-01-16 14:25:54: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:25:54: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:26:00: (message) last message repeated 1 times
+2012-01-16 14:26:00: (message) plugins\admin\admin-plugin.c.715: client-recv-queue-len = 5
+2012-01-16 14:26:46: (message) MySQL Server 5.5.15 started
+2012-01-16 14:26:46: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 14:26:46: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 14:26:46: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 14:26:52: (message) CON_STATE_INIT
+
+2012-01-16 14:26:52: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 14:26:52: (message) CON_STATE_READ_AUTH
+
+2012-01-16 14:26:52: (message) last message repeated 1 times
+2012-01-16 14:26:52: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:26:52: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:08: (message) MySQL Server 5.5.15 started
+2012-01-16 14:30:08: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 14:30:08: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 14:30:08: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 14:30:13: (message) CON_STATE_INIT
+
+2012-01-16 14:30:13: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 14:30:13: (message) CON_STATE_READ_AUTH
+
+2012-01-16 14:30:13: (message) last message repeated 1 times
+2012-01-16 14:30:13: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:30:13: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:15: (message) last message repeated 1 times
+2012-01-16 14:30:15: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:15: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:22: (message) last message repeated 1 times
+2012-01-16 14:30:22: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:22: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:24: (message) last message repeated 1 times
+2012-01-16 14:30:24: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:24: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:30: (message) last message repeated 1 times
+2012-01-16 14:30:30: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:30: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:37: (message) last message repeated 1 times
+2012-01-16 14:30:37: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:37: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:40: (message) last message repeated 1 times
+2012-01-16 14:30:40: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:40: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:42: (message) last message repeated 1 times
+2012-01-16 14:30:42: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:42: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:44: (message) last message repeated 1 times
+2012-01-16 14:30:44: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:44: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:48: (message) last message repeated 1 times
+2012-01-16 14:30:48: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:48: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:30:58: (message) last message repeated 1 times
+2012-01-16 14:30:58: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:30:58: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:31:02: (message) last message repeated 1 times
+2012-01-16 14:31:02: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:31:02: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:11: (message) CON_STATE_INIT
+
+2012-01-16 14:33:11: (message) CON_STATE_CONNECT_SERVER
+
+2012-01-16 14:33:11: (message) last message repeated 1 times
+2012-01-16 14:33:11: (message) CON_STATE_READ_HANDSHAKE
+
+2012-01-16 14:33:15: (message) last message repeated 1 times
+2012-01-16 14:33:15: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 14:33:15: (message) CON_STATE_READ_AUTH
+
+2012-01-16 14:33:15: (message) last message repeated 1 times
+2012-01-16 14:33:15: (message) CON_STATE_SEND_AUTH
+
+2012-01-16 14:33:15: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-16 14:33:15: (message) last message repeated 1 times
+2012-01-16 14:33:15: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:33:15: (message) CON_STATE_READ_AUTH_OLD_PASSWORD
+
+2012-01-16 14:33:15: (message) last message repeated 1 times
+2012-01-16 14:33:15: (message) CON_STATE_SEND_AUTH_OLD_PASSWORD
+
+2012-01-16 14:33:15: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-16 14:33:15: (message) last message repeated 1 times
+2012-01-16 14:33:15: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:33:15: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:15: (message) last message repeated 1 times
+2012-01-16 14:33:15: (message) CON_STATE_SEND_QUERY
+
+2012-01-16 14:33:15: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-16 14:33:15: (message) last message repeated 1 times
+2012-01-16 14:33:15: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:33:15: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:27: (message) last message repeated 1 times
+2012-01-16 14:33:27: (message) CON_STATE_SEND_QUERY
+
+2012-01-16 14:33:27: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-16 14:33:27: (message) last message repeated 1 times
+2012-01-16 14:33:27: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:33:27: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:32: (message) last message repeated 1 times
+2012-01-16 14:33:32: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:33:32: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:37: (message) last message repeated 1 times
+2012-01-16 14:33:37: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:33:37: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:40: (message) last message repeated 1 times
+2012-01-16 14:33:40: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:33:40: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:45: (message) last message repeated 1 times
+2012-01-16 14:33:45: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:33:45: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:50: (message) last message repeated 1 times
+2012-01-16 14:33:50: (message) CON_STATE_COLSE
+
+2012-01-16 14:33:52: (message) CON_STATE_INIT
+
+2012-01-16 14:33:52: (message) CON_STATE_CONNECT_SERVER
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_READ_HANDSHAKE
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 14:33:52: (message) CON_STATE_READ_AUTH
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_SEND_AUTH
+
+2012-01-16 14:33:52: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:33:52: (message) CON_STATE_READ_AUTH_OLD_PASSWORD
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_SEND_AUTH_OLD_PASSWORD
+
+2012-01-16 14:33:52: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:33:52: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_SEND_QUERY
+
+2012-01-16 14:33:52: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-16 14:33:52: (message) last message repeated 1 times
+2012-01-16 14:33:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:33:52: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:34:12: (message) last message repeated 1 times
+2012-01-16 14:34:12: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:34:12: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:34:16: (message) last message repeated 1 times
+2012-01-16 14:34:16: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:34:16: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:34:18: (message) last message repeated 1 times
+2012-01-16 14:34:18: (message) CON_STATE_COLSE
+
+2012-01-16 14:34:20: (message) CON_STATE_INIT
+
+2012-01-16 14:34:20: (message) CON_STATE_CONNECT_SERVER
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_READ_HANDSHAKE
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 14:34:20: (message) CON_STATE_READ_AUTH
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_SEND_AUTH
+
+2012-01-16 14:34:20: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:34:20: (message) CON_STATE_READ_AUTH_OLD_PASSWORD
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_SEND_AUTH_OLD_PASSWORD
+
+2012-01-16 14:34:20: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 14:34:20: (message) CON_STATE_READ_QUERY
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_SEND_QUERY
+
+2012-01-16 14:34:20: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-16 14:34:20: (message) last message repeated 1 times
+2012-01-16 14:34:20: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 14:34:20: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:44:01: (message) MySQL Server 5.5.15 started
+2012-01-16 16:44:01: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 16:44:01: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 16:44:01: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 16:44:07: (message) CON_STATE_INIT
+
+2012-01-16 16:44:07: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 16:44:07: (message) CON_STATE_READ_AUTH
+
+2012-01-16 16:44:07: (message) last message repeated 1 times
+2012-01-16 16:44:07: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 16:44:07: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:44:07: (critical) last message repeated 1 times
+2012-01-16 16:44:07: (critical) plugins\admin\admin-plugin.c:634: Refrush_backends error input refrush_backends('127.0.0.1:3307')
+2012-01-16 16:44:07: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:44:07: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:44:11: (critical) last message repeated 1 times
+2012-01-16 16:44:11: (critical) plugins\admin\admin-plugin.c:634: Refrush_backends error input refrush_backends('127.0.0.1:3307')
+2012-01-16 16:44:11: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:44:11: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:44:30: (critical) last message repeated 1 times
+2012-01-16 16:44:30: (critical) plugins\admin\admin-plugin.c:647: IP-address and fail flag has to be in the form Refrush_backends('ip:port[;ip:port..]', fail_flag) refrush_backends('127.0.0.1:3307', 0). Failed to parse the fail_flag at ''
+2012-01-16 16:44:30: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:44:30: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:44:35: (critical) last message repeated 1 times
+2012-01-16 16:44:35: (critical) plugins\admin\admin-plugin.c:647: IP-address and fail flag has to be in the form Refrush_backends('ip:port[;ip:port..]', fail_flag) refrush_backends('127.0.0.1:3307', 0). Failed to parse the fail_flag at ''
+2012-01-16 16:44:35: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:44:35: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:53:32: (message) MySQL Server 5.5.15 started
+2012-01-16 16:53:32: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 16:53:32: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 16:53:32: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 16:53:46: (message) CON_STATE_INIT
+
+2012-01-16 16:53:46: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 16:53:46: (message) CON_STATE_READ_AUTH
+
+2012-01-16 16:53:46: (message) last message repeated 1 times
+2012-01-16 16:53:46: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 16:53:46: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:19: (message) last message repeated 1 times
+2012-01-16 16:54:19: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:19: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:35: (message) last message repeated 1 times
+2012-01-16 16:54:35: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:35: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:41: (message) last message repeated 1 times
+2012-01-16 16:54:41: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:41: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:42: (message) last message repeated 1 times
+2012-01-16 16:54:42: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:42: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:44: (message) last message repeated 1 times
+2012-01-16 16:54:44: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:44: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:47: (message) last message repeated 1 times
+2012-01-16 16:54:47: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:47: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:52: (critical) last message repeated 1 times
+2012-01-16 16:54:52: (critical) plugins\admin\admin-plugin.c:342: Fail flag of refrush backends must be 0 or 1, but the flag is 2
+2012-01-16 16:54:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:52: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:54:54: (critical) last message repeated 1 times
+2012-01-16 16:54:54: (critical) plugins\admin\admin-plugin.c:342: Fail flag of refrush backends must be 0 or 1, but the flag is 2
+2012-01-16 16:54:54: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:54:54: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:55:10: (message) last message repeated 1 times
+2012-01-16 16:55:10: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:55:10: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:55:11: (message) last message repeated 1 times
+2012-01-16 16:55:11: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:55:11: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:55:12: (message) last message repeated 1 times
+2012-01-16 16:55:12: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:55:12: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:55:12: (message) last message repeated 1 times
+2012-01-16 16:55:12: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:55:12: (message) CON_STATE_READ_QUERY
+
+2012-01-16 16:55:15: (message) last message repeated 1 times
+2012-01-16 16:55:15: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 16:55:15: (message) CON_STATE_READ_QUERY
+
+2012-01-16 20:35:54: (message) MySQL Server 5.5.15 started
+2012-01-16 20:35:54: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 20:35:54: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 20:35:54: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 20:36:04: (message) CON_STATE_INIT
+
+2012-01-16 20:36:04: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 20:36:04: (message) CON_STATE_READ_AUTH
+
+2012-01-16 20:36:04: (message) last message repeated 1 times
+2012-01-16 20:36:04: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 20:36:04: (message) CON_STATE_READ_QUERY
+
+2012-01-16 20:36:04: (message) last message repeated 1 times
+2012-01-16 20:36:04: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 20:36:04: (message) CON_STATE_READ_QUERY
+
+2012-01-16 20:36:07: (message) last message repeated 1 times
+2012-01-16 20:36:07: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-16 20:36:07: (message) CON_STATE_READ_QUERY
+
+2012-01-16 20:37:41: (message) MySQL Server 5.5.15 started
+2012-01-16 20:37:41: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 20:37:41: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 20:37:41: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 20:37:54: (message) CON_STATE_INIT
+
+2012-01-16 20:37:54: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 20:37:54: (message) CON_STATE_READ_AUTH
+
+2012-01-16 20:37:54: (message) last message repeated 1 times
+2012-01-16 20:37:54: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 20:37:54: (message) CON_STATE_READ_QUERY
+
+2012-01-16 20:53:28: (message) MySQL Server 5.5.15 started
+2012-01-16 20:53:28: (message) proxy listening on port 0.0.0.0:4406
+2012-01-16 20:53:28: (message) added read/write backend: 127.0.0.1:3306
+2012-01-16 20:53:28: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-16 20:53:31: (message) CON_STATE_INIT
+
+2012-01-16 20:53:31: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-16 20:53:31: (message) CON_STATE_READ_AUTH
+
+2012-01-16 20:53:31: (message) last message repeated 1 times
+2012-01-16 20:53:31: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-16 20:53:31: (message) CON_STATE_READ_QUERY
+
+2012-01-17 09:33:22: (message) MySQL Server 5.5.15 started
+2012-01-17 09:33:22: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 09:33:22: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 09:33:22: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 09:33:34: (message) CON_STATE_INIT
+
+2012-01-17 09:33:34: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 09:33:34: (message) CON_STATE_READ_AUTH
+
+2012-01-17 09:33:34: (message) last message repeated 1 times
+2012-01-17 09:33:34: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 09:33:34: (message) CON_STATE_READ_QUERY
+
+2012-01-17 09:36:45: (message) MySQL Server 5.5.15 started
+2012-01-17 09:36:45: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 09:36:45: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 09:36:45: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 09:36:51: (message) CON_STATE_INIT
+
+2012-01-17 09:36:51: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 09:36:51: (message) CON_STATE_READ_AUTH
+
+2012-01-17 09:36:51: (message) last message repeated 1 times
+2012-01-17 09:36:51: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 09:36:51: (message) CON_STATE_READ_QUERY
+
+2012-01-17 09:39:28: (message) MySQL Server 5.5.15 started
+2012-01-17 09:39:28: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 09:39:28: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 09:39:28: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 09:39:31: (message) CON_STATE_INIT
+
+2012-01-17 09:39:31: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 09:39:31: (message) CON_STATE_READ_AUTH
+
+2012-01-17 09:39:31: (message) last message repeated 1 times
+2012-01-17 09:39:31: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 09:39:31: (message) CON_STATE_READ_QUERY
+
+2012-01-17 09:43:36: (message) MySQL Server 5.5.15 started
+2012-01-17 09:43:36: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 09:43:36: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 09:43:36: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 09:43:42: (message) CON_STATE_INIT
+
+2012-01-17 09:43:42: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 09:43:42: (message) CON_STATE_READ_AUTH
+
+2012-01-17 09:43:42: (message) last message repeated 1 times
+2012-01-17 09:43:42: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 09:43:42: (message) CON_STATE_READ_QUERY
+
+2012-01-17 09:45:40: (message) last message repeated 1 times
+2012-01-17 09:45:40: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 09:45:40: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:19:39: (message) MySQL Server 5.5.15 started
+2012-01-17 10:19:39: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:19:39: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 10:19:39: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:19:52: (message) CON_STATE_INIT
+
+2012-01-17 10:19:52: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 10:19:52: (message) CON_STATE_READ_AUTH
+
+2012-01-17 10:19:52: (message) last message repeated 1 times
+2012-01-17 10:19:52: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 10:19:52: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:22:01: (message) last message repeated 1 times
+2012-01-17 10:22:01: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:22:01: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:23:09: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:24:23: (message) Key file contains key 'admin-lua-script' which has value that cannot be interpreted.
+2012-01-17 10:24:23: (message) Initiating shutdown, requested from f:\mysql_proxy0_82\source\src\mysql-proxy-cli.c:502
+2012-01-17 10:24:23: (message) shutting down normally, exit code is: 1
+2012-01-17 10:24:28: (message) Key file contains key 'admin-lua-script' which has value that cannot be interpreted.
+2012-01-17 10:24:28: (message) Initiating shutdown, requested from f:\mysql_proxy0_82\source\src\mysql-proxy-cli.c:502
+2012-01-17 10:24:28: (message) shutting down normally, exit code is: 1
+2012-01-17 10:24:49: (message) MySQL Server 5.5.15 started
+2012-01-17 10:24:49: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:24:49: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 10:24:49: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:25:27: (message) MySQL Server 5.5.15 started
+2012-01-17 10:25:27: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:25:27: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 10:25:27: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:25:45: (message) CON_STATE_INIT
+
+2012-01-17 10:25:45: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 10:25:45: (message) CON_STATE_READ_AUTH
+
+2012-01-17 10:25:45: (message) last message repeated 1 times
+2012-01-17 10:25:45: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 10:25:45: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:25:45: (message) last message repeated 1 times
+2012-01-17 10:25:45: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:25:45: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:29:46: (message) MySQL Server 5.5.15 started
+2012-01-17 10:29:46: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:29:46: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 10:29:46: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:29:51: (message) CON_STATE_INIT
+
+2012-01-17 10:29:51: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 10:29:51: (message) CON_STATE_READ_AUTH
+
+2012-01-17 10:29:51: (message) last message repeated 1 times
+2012-01-17 10:29:51: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 10:29:51: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:29:51: (message) last message repeated 1 times
+2012-01-17 10:29:51: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:29:51: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:29:52: (message) last message repeated 1 times
+2012-01-17 10:29:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:29:52: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:30:02: (message) last message repeated 1 times
+2012-01-17 10:30:02: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:30:02: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:30:28: (message) last message repeated 1 times
+2012-01-17 10:30:28: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:30:28: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:36:05: (message) MySQL Server 5.5.15 started
+2012-01-17 10:36:05: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:36:05: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 10:36:05: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:36:09: (message) CON_STATE_INIT
+
+2012-01-17 10:36:09: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 10:36:09: (message) CON_STATE_READ_AUTH
+
+2012-01-17 10:36:09: (message) last message repeated 1 times
+2012-01-17 10:36:09: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 10:36:09: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:36:09: (message) last message repeated 1 times
+2012-01-17 10:36:09: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:36:09: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:36:14: (message) last message repeated 1 times
+2012-01-17 10:36:14: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:36:14: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:36:46: (message) MySQL Server 5.5.15 started
+2012-01-17 10:36:46: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:36:46: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 10:36:46: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:37:03: (message) CON_STATE_INIT
+
+2012-01-17 10:37:03: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 10:37:03: (message) CON_STATE_READ_AUTH
+
+2012-01-17 10:37:03: (message) last message repeated 1 times
+2012-01-17 10:37:03: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 10:37:03: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:37:03: (critical) last message repeated 1 times
+2012-01-17 10:37:03: (critical) plugins\admin\admin-plugin.c:590: Number of refrush backends num is not matched, new backends :2, orignal backends : 1
+2012-01-17 10:37:03: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:37:03: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:37:12: (critical) last message repeated 1 times
+2012-01-17 10:37:12: (critical) plugins\admin\admin-plugin.c:590: Number of refrush backends num is not matched, new backends :2, orignal backends : 1
+2012-01-17 10:37:12: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:37:12: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:37:32: (message) MySQL Server 5.5.15 started
+2012-01-17 10:37:32: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:37:32: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 10:37:32: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:37:35: (message) CON_STATE_INIT
+
+2012-01-17 10:37:35: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 10:37:35: (message) CON_STATE_READ_AUTH
+
+2012-01-17 10:37:35: (message) last message repeated 1 times
+2012-01-17 10:37:35: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 10:37:35: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:37:35: (critical) last message repeated 1 times
+2012-01-17 10:37:35: (critical) plugins\admin\admin-plugin.c:590: Number of refrush backends num is not matched, new backends :2, orignal backends : 1
+2012-01-17 10:37:35: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:37:35: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:38:15: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:38:21: (critical) plugins\admin\admin-plugin.c:590: Number of refrush backends num is not matched, new backends :2, orignal backends : 1
+2012-01-17 10:38:21: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 10:38:21: (message) CON_STATE_READ_QUERY
+
+2012-01-17 10:41:21: (message) MySQL Server 5.5.15 started
+2012-01-17 10:41:21: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:41:21: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 10:41:21: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:42:39: (message) MySQL Server 5.5.15 started
+2012-01-17 10:42:39: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:42:39: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 10:42:39: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 10:44:06: (message) MySQL Server 5.5.15 started
+2012-01-17 10:44:06: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 10:44:06: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 10:44:06: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 10:44:06: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 11:03:08: (message) MySQL Server 5.5.15 started
+2012-01-17 11:03:08: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 11:03:08: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 11:03:08: (message) added read/write backend: 127.0.0.1:3306
+2012-01-17 11:03:08: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 11:03:14: (message) CON_STATE_INIT
+
+2012-01-17 11:03:14: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 11:03:14: (message) CON_STATE_READ_AUTH
+
+2012-01-17 11:03:14: (message) last message repeated 1 times
+2012-01-17 11:03:14: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 11:03:14: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:03:28: (message) last message repeated 1 times
+2012-01-17 11:03:28: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:03:28: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:03:41: (message) last message repeated 1 times
+2012-01-17 11:03:41: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:03:41: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:04:27: (message) MySQL Server 5.5.15 started
+2012-01-17 11:04:27: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 11:04:27: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 11:04:27: (message) added read/write backend: 127.0.0.1:3308
+2012-01-17 11:04:27: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 11:45:23: (message) MySQL Server 5.5.15 started
+2012-01-17 11:45:23: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 11:45:23: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 11:45:23: (message) added read/write backend: 127.0.0.1:3308
+2012-01-17 11:45:23: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 11:45:34: (message) CON_STATE_INIT
+
+2012-01-17 11:45:34: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 11:45:34: (message) CON_STATE_READ_AUTH
+
+2012-01-17 11:45:34: (message) last message repeated 1 times
+2012-01-17 11:45:34: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 11:45:34: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:45:34: (message) last message repeated 1 times
+2012-01-17 11:45:34: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:45:34: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:45:50: (message) last message repeated 1 times
+2012-01-17 11:45:50: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:45:50: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:45:58: (message) last message repeated 1 times
+2012-01-17 11:45:58: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:45:58: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:46:26: (message) last message repeated 1 times
+2012-01-17 11:46:26: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:46:26: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:46:52: (message) last message repeated 1 times
+2012-01-17 11:46:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:46:52: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:47:08: (message) last message repeated 1 times
+2012-01-17 11:47:08: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:47:08: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:47:25: (message) last message repeated 1 times
+2012-01-17 11:47:25: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:47:25: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:48:06: (message) last message repeated 1 times
+2012-01-17 11:48:06: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:48:06: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:49:04: (message) last message repeated 1 times
+2012-01-17 11:49:04: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:49:04: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:56:16: (message) MySQL Server 5.5.15 started
+2012-01-17 11:56:16: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 11:56:16: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 11:56:16: (message) added read/write backend: 127.0.0.1:3309
+2012-01-17 11:56:16: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 11:56:26: (message) CON_STATE_INIT
+
+2012-01-17 11:56:26: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 11:56:26: (message) CON_STATE_READ_AUTH
+
+2012-01-17 11:56:26: (message) last message repeated 1 times
+2012-01-17 11:56:26: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 11:56:26: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:56:30: (critical) last message repeated 1 times
+2012-01-17 11:56:30: (critical) plugins\admin\admin-plugin.c:608: Number of refrush backends num is not matched, new backends :1, orignal backends : 2
+2012-01-17 11:56:30: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:56:30: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:57:51: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:57:51: (critical) plugins\admin\admin-plugin.c:615: Fail flag of refrush backends must be 0 or 1, but the flag is 2
+2012-01-17 11:57:51: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 11:57:51: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:59:48: (message) CON_STATE_READ_QUERY
+
+2012-01-17 11:59:55: (critical) plugins\admin\admin-plugin.c:958: refresh_backends('127.0.0.1:3307, 127.0.0.1:3309 ' , 2)
+2012-01-17 12:00:38: (critical) plugins\admin\admin-plugin.c:615: Fail flag of refrush backends must be 0 or 1, but the flag is 2
+2012-01-17 12:00:38: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 12:00:38: (message) CON_STATE_READ_QUERY
+
+2012-01-17 12:00:48: (critical) last message repeated 1 times
+2012-01-17 12:00:48: (critical) plugins\admin\admin-plugin.c:615: Fail flag of refrush backends must be 0 or 1, but the flag is 2
+2012-01-17 12:00:48: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 12:00:48: (message) CON_STATE_READ_QUERY
+
+2012-01-17 12:01:23: (message) CON_STATE_READ_QUERY
+
+2012-01-17 12:01:23: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 12:01:23: (message) CON_STATE_READ_QUERY
+
+2012-01-17 12:01:49: (message) MySQL Server 5.5.15 started
+2012-01-17 12:01:49: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 12:01:49: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 12:01:49: (message) added read/write backend: 127.0.0.1:3309
+2012-01-17 12:01:49: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 12:01:51: (message) CON_STATE_INIT
+
+2012-01-17 12:01:51: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 12:01:51: (message) CON_STATE_READ_AUTH
+
+2012-01-17 12:01:51: (message) last message repeated 1 times
+2012-01-17 12:01:51: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 12:01:51: (message) CON_STATE_READ_QUERY
+
+2012-01-17 12:01:51: (critical) last message repeated 1 times
+2012-01-17 12:01:51: (critical) plugins\admin\admin-plugin.c:958: Executing refresh_backends('127.0.0.1:3307, 127.0.0.1:3309 ' , 1)
+2012-01-17 12:01:51: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 12:01:51: (message) CON_STATE_READ_QUERY
+
+2012-01-17 12:01:52: (critical) last message repeated 1 times
+2012-01-17 12:01:52: (critical) plugins\admin\admin-plugin.c:958: Executing refresh_backends('127.0.0.1:3307, 127.0.0.1:3309 ' , 1)
+2012-01-17 12:01:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 12:01:52: (message) CON_STATE_READ_QUERY
+
+2012-01-17 15:25:13: (message) MySQL Server 5.5.15 started
+2012-01-17 15:25:13: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 15:25:13: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 15:25:13: (message) added read/write backend: 127.0.0.1:3309
+2012-01-17 15:25:13: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 17:05:35: (message) MySQL Server 5.5.15 started
+2012-01-17 17:05:35: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 17:05:35: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 17:05:35: (message) added read/write backend: 127.0.0.1:3309
+2012-01-17 17:05:36: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 18:24:56: (message) MySQL Server 5.5.15 started
+2012-01-17 18:24:56: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 18:24:56: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 18:24:56: (message) added read/write backend: 127.0.0.1:3309
+2012-01-17 18:24:56: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 18:25:03: (message) CON_STATE_INIT
+
+2012-01-17 18:25:03: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 18:25:03: (message) CON_STATE_READ_AUTH
+
+2012-01-17 18:25:03: (message) last message repeated 1 times
+2012-01-17 18:25:03: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 18:25:03: (message) CON_STATE_READ_QUERY
+
+2012-01-17 18:25:03: (message) last message repeated 1 times
+2012-01-17 18:25:03: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 18:25:03: (message) CON_STATE_READ_QUERY
+
+2012-01-17 18:25:10: (message) last message repeated 1 times
+2012-01-17 18:25:10: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 18:25:10: (message) CON_STATE_READ_QUERY
+
+2012-01-17 18:25:11: (message) last message repeated 1 times
+2012-01-17 18:25:11: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 18:25:11: (message) CON_STATE_READ_QUERY
+
+2012-01-17 21:12:03: (message) MySQL Server 5.5.15 started
+2012-01-17 21:12:03: (message) proxy listening on port 0.0.0.0:4406
+2012-01-17 21:12:03: (message) added read/write backend: 127.0.0.1:3307
+2012-01-17 21:12:03: (message) added read/write backend: 127.0.0.1:3309
+2012-01-17 21:12:03: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-17 21:12:11: (message) CON_STATE_INIT
+
+2012-01-17 21:12:11: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-17 21:12:11: (message) CON_STATE_READ_AUTH
+
+2012-01-17 21:12:11: (message) last message repeated 1 times
+2012-01-17 21:12:11: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-17 21:12:11: (message) CON_STATE_READ_QUERY
+
+2012-01-17 21:12:11: (message) last message repeated 1 times
+2012-01-17 21:12:11: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 21:12:11: (message) CON_STATE_READ_QUERY
+
+2012-01-17 21:12:17: (message) last message repeated 1 times
+2012-01-17 21:12:17: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 21:12:17: (message) CON_STATE_READ_QUERY
+
+2012-01-17 21:12:25: (message) last message repeated 1 times
+2012-01-17 21:12:25: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 21:12:25: (message) CON_STATE_READ_QUERY
+
+2012-01-17 21:12:36: (critical) last message repeated 1 times
+2012-01-17 21:12:36: (critical) plugins\admin\admin-plugin.c:958: Executing refresh_backends('127.0.0.1:3307;127.0.0.1:3306', 0)
+2012-01-17 21:12:36: (critical) plugins\admin\admin-plugin.c:608: Number of refrush backends num is not matched, new backends :1, orignal backends : 2
+2012-01-17 21:12:36: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 21:12:36: (message) CON_STATE_READ_QUERY
+
+2012-01-17 21:12:48: (critical) last message repeated 1 times
+2012-01-17 21:12:48: (critical) plugins\admin\admin-plugin.c:958: Executing refresh_backends('127.0.0.1:3307,127.0.0.1:3306', 0)
+2012-01-17 21:12:48: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 21:12:48: (message) CON_STATE_READ_QUERY
+
+2012-01-17 21:12:52: (message) last message repeated 1 times
+2012-01-17 21:12:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-17 21:12:52: (message) CON_STATE_READ_QUERY
+
+2012-01-18 10:03:46: (message) MySQL Server 5.5.15 started
+2012-01-18 10:03:46: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 10:03:46: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 10:03:46: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 10:03:46: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:27:05: (message) MySQL Server 5.5.15 started
+2012-01-18 11:27:05: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 11:27:05: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 11:27:05: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 11:27:05: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:27:16: (message) CON_STATE_INIT
+
+2012-01-18 11:27:16: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:27:16: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:27:16: (message) last message repeated 1 times
+2012-01-18 11:27:16: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:27:16: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:27:16: (critical) last message repeated 1 times
+2012-01-18 11:27:16: (critical) src\network-mysqld-lua.c:234: lua_load_file(F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/admin.lua) failed: [string "F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/admin.lua"]:101: 'end' expected (to close 'function' at line 29) near 'elseif'
+2012-01-18 11:27:16: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:27:16: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:27:17: (critical) last message repeated 1 times
+2012-01-18 11:27:17: (critical) src\network-mysqld-lua.c:234: lua_load_file(F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/admin.lua) failed: [string "F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/admin.lua"]:101: 'end' expected (to close 'function' at line 29) near 'elseif'
+2012-01-18 11:27:17: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:27:17: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:27:19: (critical) last message repeated 1 times
+2012-01-18 11:27:19: (critical) src\network-mysqld-lua.c:234: lua_load_file(F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/admin.lua) failed: [string "F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/admin.lua"]:101: 'end' expected (to close 'function' at line 29) near 'elseif'
+2012-01-18 11:27:19: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:27:19: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:29:40: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:29:40: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:29:40: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:29:42: (message) last message repeated 1 times
+2012-01-18 11:29:42: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:29:42: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:30:39: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:30:39: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:30:39: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:30:41: (message) last message repeated 1 times
+2012-01-18 11:30:41: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:30:41: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:30:48: (message) last message repeated 1 times
+2012-01-18 11:30:48: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:30:48: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:31:16: (message) MySQL Server 5.5.15 started
+2012-01-18 11:31:16: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 11:31:16: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 11:31:16: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 11:31:16: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:31:28: (message) CON_STATE_INIT
+
+2012-01-18 11:31:28: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:31:28: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:31:28: (message) last message repeated 1 times
+2012-01-18 11:31:28: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:31:28: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:31:28: (message) last message repeated 1 times
+2012-01-18 11:31:28: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:31:28: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:31:32: (critical) last message repeated 1 times
+2012-01-18 11:31:32: (critical) (read_query) [string "F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/..."]:96: attempt to index local 'server' (a nil value)
+2012-01-18 11:31:32: (message) CON_STATE_SEND_ERROR
+
+2012-01-18 11:31:32: (message) CON_STATE_ERROR
+
+2012-01-18 11:34:22: (message) CON_STATE_INIT
+
+2012-01-18 11:34:22: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:34:22: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:34:22: (message) last message repeated 1 times
+2012-01-18 11:34:22: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:34:22: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:34:22: (message) last message repeated 1 times
+2012-01-18 11:34:22: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:34:22: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:34:34: (message) last message repeated 1 times
+2012-01-18 11:34:34: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:34:34: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:34:36: (message) last message repeated 1 times
+2012-01-18 11:34:36: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:34:36: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:34:37: (message) last message repeated 1 times
+2012-01-18 11:34:37: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:34:37: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:34:38: (message) last message repeated 1 times
+2012-01-18 11:34:38: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:34:38: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:34:45: (message) last message repeated 1 times
+2012-01-18 11:34:45: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:34:45: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:34:46: (message) last message repeated 1 times
+2012-01-18 11:34:46: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:34:46: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:08: (message) MySQL Server 5.5.15 started
+2012-01-18 11:35:08: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 11:35:08: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 11:35:08: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 11:35:08: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:35:11: (message) CON_STATE_INIT
+
+2012-01-18 11:35:11: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:35:11: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:35:11: (message) last message repeated 1 times
+2012-01-18 11:35:11: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:35:11: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:11: (message) last message repeated 1 times
+2012-01-18 11:35:11: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:35:11: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:12: (message) last message repeated 1 times
+2012-01-18 11:35:12: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:35:12: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:13: (message) last message repeated 1 times
+2012-01-18 11:35:13: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:35:13: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:14: (message) last message repeated 1 times
+2012-01-18 11:35:14: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:35:14: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:49: (message) MySQL Server 5.5.15 started
+2012-01-18 11:35:49: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 11:35:49: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 11:35:49: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 11:35:49: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:35:54: (message) CON_STATE_INIT
+
+2012-01-18 11:35:54: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:35:54: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:35:54: (message) last message repeated 1 times
+2012-01-18 11:35:54: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:35:54: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:54: (message) last message repeated 1 times
+2012-01-18 11:35:54: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:35:54: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:35:56: (message) last message repeated 1 times
+2012-01-18 11:35:56: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:35:56: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:36:43: (message) MySQL Server 5.5.15 started
+2012-01-18 11:36:43: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 11:36:43: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 11:36:43: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 11:36:43: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:36:47: (message) CON_STATE_INIT
+
+2012-01-18 11:36:47: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:36:47: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:36:47: (message) last message repeated 1 times
+2012-01-18 11:36:47: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:36:47: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:36:47: (critical) last message repeated 1 times
+2012-01-18 11:36:47: (critical) (read_query) [string "F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/..."]:97: attempt to index local 'server' (a nil value)
+2012-01-18 11:36:47: (message) CON_STATE_SEND_ERROR
+
+2012-01-18 11:36:47: (message) CON_STATE_ERROR
+
+2012-01-18 11:36:49: (message) CON_STATE_INIT
+
+2012-01-18 11:36:49: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:36:49: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:36:49: (message) last message repeated 1 times
+2012-01-18 11:36:49: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:36:49: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:36:49: (critical) last message repeated 1 times
+2012-01-18 11:36:49: (critical) (read_query) [string "F:/mysql/Mysql Proxy/mysql-proxy-0.8.2/lib/..."]:97: attempt to index local 'server' (a nil value)
+2012-01-18 11:36:49: (message) CON_STATE_SEND_ERROR
+
+2012-01-18 11:36:49: (message) CON_STATE_ERROR
+
+2012-01-18 11:45:38: (message) MySQL Server 5.5.15 started
+2012-01-18 11:45:38: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 11:45:38: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 11:45:38: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 11:45:38: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:45:41: (message) CON_STATE_INIT
+
+2012-01-18 11:45:41: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:45:41: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:45:41: (message) last message repeated 1 times
+2012-01-18 11:45:41: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:45:41: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:45:41: (message) last message repeated 1 times
+2012-01-18 11:45:41: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:45:41: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:51: (message) MySQL Server 5.5.15 started
+2012-01-18 11:47:51: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 11:47:51: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 11:47:51: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 11:47:51: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 11:47:53: (message) CON_STATE_INIT
+
+2012-01-18 11:47:53: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:47:53: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:47:53: (message) last message repeated 1 times
+2012-01-18 11:47:53: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:47:53: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:53: (message) last message repeated 1 times
+2012-01-18 11:47:53: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:47:53: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:54: (message) last message repeated 1 times
+2012-01-18 11:47:54: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:47:54: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:55: (message) last message repeated 1 times
+2012-01-18 11:47:55: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:47:55: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:55: (message) last message repeated 1 times
+2012-01-18 11:47:55: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:47:55: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:56: (message) last message repeated 1 times
+2012-01-18 11:47:56: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:47:56: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:57: (message) last message repeated 1 times
+2012-01-18 11:47:57: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:47:57: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:47:57: (message) last message repeated 1 times
+2012-01-18 11:47:57: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:47:57: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:01: (message) last message repeated 1 times
+2012-01-18 11:48:01: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:48:01: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:12: (message) CON_STATE_INIT
+
+2012-01-18 11:48:12: (message) CON_STATE_CONNECT_SERVER
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_READ_HANDSHAKE
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 11:48:12: (message) CON_STATE_READ_AUTH
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_SEND_AUTH
+
+2012-01-18 11:48:12: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:48:12: (message) CON_STATE_READ_AUTH_OLD_PASSWORD
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_SEND_AUTH_OLD_PASSWORD
+
+2012-01-18 11:48:12: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 11:48:12: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 11:48:12: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 11:48:12: (message) last message repeated 1 times
+2012-01-18 11:48:12: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:48:12: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:13: (message) last message repeated 1 times
+2012-01-18 11:48:13: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 11:48:13: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 11:48:13: (message) last message repeated 1 times
+2012-01-18 11:48:13: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:48:13: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:15: (message) last message repeated 1 times
+2012-01-18 11:48:15: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:48:15: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:16: (message) last message repeated 1 times
+2012-01-18 11:48:16: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:48:16: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:17: (message) last message repeated 1 times
+2012-01-18 11:48:17: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:48:17: (message) CON_STATE_READ_QUERY
+
+2012-01-18 11:48:27: (message) last message repeated 1 times
+2012-01-18 11:48:27: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 11:48:27: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:00:39: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:00:39: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:00:39: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:00:39: (message) last message repeated 1 times
+2012-01-18 12:00:39: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:00:39: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:00:39: (message) last message repeated 1 times
+2012-01-18 12:00:39: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:00:39: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:00:41: (message) last message repeated 1 times
+2012-01-18 12:00:41: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:00:41: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:11:41: (message) MySQL Server 5.5.15 started
+2012-01-18 12:11:41: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 12:11:41: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 12:11:41: (message) added read/write backend: 127.0.0.1:3306
+2012-01-18 12:11:41: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 12:11:47: (message) CON_STATE_INIT
+
+2012-01-18 12:11:47: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 12:11:47: (message) CON_STATE_READ_AUTH
+
+2012-01-18 12:11:47: (message) last message repeated 1 times
+2012-01-18 12:11:47: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:11:47: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:11:47: (message) last message repeated 1 times
+2012-01-18 12:11:47: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:11:47: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:11:48: (message) last message repeated 1 times
+2012-01-18 12:11:48: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:11:48: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:11:49: (message) last message repeated 1 times
+2012-01-18 12:11:49: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:11:49: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:08: (message) MySQL Server 5.5.15 started
+2012-01-18 12:13:08: (message) proxy listening on port 0.0.0.0:4406
+2012-01-18 12:13:08: (message) added read/write backend: 127.0.0.1:3307
+2012-01-18 12:13:08: (message) src\chassis-event-thread.c:436: starting 6 threads
+2012-01-18 12:13:24: (message) CON_STATE_INIT
+
+2012-01-18 12:13:24: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 12:13:24: (message) CON_STATE_READ_AUTH
+
+2012-01-18 12:13:24: (message) last message repeated 1 times
+2012-01-18 12:13:24: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:13:24: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:24: (message) last message repeated 1 times
+2012-01-18 12:13:24: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:13:24: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:26: (message) last message repeated 1 times
+2012-01-18 12:13:26: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:13:26: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:49: (message) CON_STATE_INIT
+
+2012-01-18 12:13:49: (message) CON_STATE_CONNECT_SERVER
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_READ_HANDSHAKE
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_AUTH
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_AUTH
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_AUTH_OLD_PASSWORD
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_AUTH_OLD_PASSWORD
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 12:13:50: (message) last message repeated 1 times
+2012-01-18 12:13:50: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:13:50: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:51: (message) last message repeated 1 times
+2012-01-18 12:13:51: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 12:13:51: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 12:13:51: (message) last message repeated 1 times
+2012-01-18 12:13:51: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:13:51: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:52: (message) last message repeated 1 times
+2012-01-18 12:13:52: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 12:13:52: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 12:13:52: (message) last message repeated 1 times
+2012-01-18 12:13:52: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:13:52: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:13:59: (message) last message repeated 1 times
+2012-01-18 12:13:59: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:13:59: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:14:01: (message) last message repeated 1 times
+2012-01-18 12:14:01: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:14:01: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:14:15: (critical) last message repeated 1 times
+2012-01-18 12:14:15: (critical) plugins\admin\admin-plugin.c:967: Executing refresh_backends('127.0.0.1:3306', 0)
+2012-01-18 12:14:15: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:14:15: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:14:15: (critical) ioctl(7456, FIONREAD, ...) failed: No error
+2012-01-18 12:14:15: (message) CON_STATE_ERROR
+
+2012-01-18 12:14:18: (message) CON_STATE_INIT
+
+2012-01-18 12:14:18: (message) CON_STATE_CONNECT_SERVER
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_READ_HANDSHAKE
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 12:14:18: (message) CON_STATE_READ_AUTH
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_SEND_AUTH
+
+2012-01-18 12:14:18: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:14:18: (message) CON_STATE_READ_AUTH_OLD_PASSWORD
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_SEND_AUTH_OLD_PASSWORD
+
+2012-01-18 12:14:18: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:14:18: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 12:14:18: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 12:14:18: (message) last message repeated 1 times
+2012-01-18 12:14:18: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:14:18: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:15:09: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:15:09: (critical) plugins\admin\admin-plugin.c:967: Executing refresh_backends('127.0.0.1:3307', 0)
+2012-01-18 12:15:09: (critical) ioctl(7444, FIONREAD, ...) failed: No error
+2012-01-18 12:15:09: (message) CON_STATE_ERROR
+
+2012-01-18 12:15:09: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:15:09: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:15:19: (message) CON_STATE_INIT
+
+2012-01-18 12:15:19: (message) CON_STATE_CONNECT_SERVER
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_READ_HANDSHAKE
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_SEND_HANDSHAKE
+
+2012-01-18 12:15:19: (message) CON_STATE_READ_AUTH
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_SEND_AUTH
+
+2012-01-18 12:15:19: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:15:19: (message) CON_STATE_READ_AUTH_OLD_PASSWORD
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_SEND_AUTH_OLD_PASSWORD
+
+2012-01-18 12:15:19: (message) CON_STATE_READ_AUTH_RESULT
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_SEND_AUTH_RESULT
+
+2012-01-18 12:15:19: (message) CON_STATE_READ_QUERY
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_SEND_QUERY
+
+2012-01-18 12:15:19: (message) CON_STATE_READ_QUERY_RESULT
+
+2012-01-18 12:15:19: (message) last message repeated 1 times
+2012-01-18 12:15:19: (message) CON_STATE_SEND_QUERY_RESULT
+
+2012-01-18 12:15:19: (message) CON_STATE_READ_QUERY
+
+2012-01-31 11:29:44: (message) MySQL Server 5.5.15 started
+2012-01-31 11:29:44: (message) proxy listening on port 0.0.0.0:4406
+2012-01-31 11:29:44: (message) added read/write backend: 127.0.0.1:3306
+2012-01-31 11:29:44: (message) src\chassis-event-thread.c:436: starting 6 threads

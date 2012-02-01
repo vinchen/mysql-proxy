@@ -1,0 +1,3 @@
+#define PACKAGE_STRING "MySQL Server 5.5.15"
+
+#define PACKAGE_VERSION "5.5.15"
