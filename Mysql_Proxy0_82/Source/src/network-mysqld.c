@@ -143,6 +143,7 @@ chassis_private *network_mysqld_priv_init(void) {
 	priv = g_new0(chassis_private, 1);
 
 	priv->cons = g_ptr_array_new();
+	priv->cons_mutex = g_mutex_new();		//add by vinchen/CFR
 	priv->sc = lua_scope_new();
 	priv->backends  = network_backends_new();
 
@@ -168,6 +169,7 @@ void network_mysqld_priv_free(chassis G_GNUC_UNUSED *chas, chassis_private *priv
 	if (!priv) return;
 
 	g_ptr_array_free(priv->cons, TRUE);
+	g_mutex_free(priv->cons_mutex);		//add by vinchen/CFR
 
 	network_backends_free(priv->backends);
 
@@ -212,7 +214,9 @@ network_mysqld_con *network_mysqld_con_new() {
 void network_mysqld_add_connection(chassis *srv, network_mysqld_con *con) {
 	con->srv = srv;
 
+	g_mutex_lock(srv->priv->cons_mutex);		//add by vinchen/CFR for cons's thread safe
 	g_ptr_array_add(srv->priv->cons, con);
+	g_mutex_unlock(srv->priv->cons_mutex);
 }
 
 /**
@@ -233,8 +237,10 @@ void network_mysqld_con_free(network_mysqld_con *con) {
 	if (con->client) network_socket_free(con->client);
 
 	/* we are still in the conns-array */
-
+	g_mutex_lock(con->srv->priv->cons_mutex);		//add by vinchen/CFR for cons's thread safe
 	g_ptr_array_remove_fast(con->srv->priv->cons, con);
+	g_mutex_unlock(con->srv->priv->cons_mutex);
+	
 	chassis_timestamps_free(con->timestamps);
 
 	g_free(con);
@@ -829,6 +835,7 @@ const char *network_mysqld_con_state_get_name(network_mysqld_con_state_t state) 
 	return "unknown";
 }
 
+
 /**
  * handle the different states of the MySQL protocol
  *
@@ -846,6 +853,8 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 	g_assert(srv);
 	g_assert(con);
 
+	//add by 
+
 	if (events == EV_READ) {
 		int b = -1;
 
@@ -857,7 +866,7 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 		 * - or -1 and ECONNRESET on solaris
 		 *   or -1 and EPIPE on HP/UX
 		 */
-		if (ioctl(event_fd, FIONREAD, &b)) {
+		if (ioctl(event_fd, FIONREAD, &b)) {  /* 获取接受缓冲区的字节数 */
 			switch (errno) {
 			case E_NET_CONNRESET: /* solaris */
 			case EPIPE: /* hp/ux */
@@ -882,7 +891,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 				con->client->to_read = b;
 			} else if (con->server && event_fd == con->server->fd) {
 				con->server->to_read = b;
-			} else {
+				/* add by vinchen/CFR */
+			} else if(con->server && con->server->backend_idx != -1 && con->server->disconnect_flag == 1){
+				con->state = CON_STATE_ERROR;
+			} else{
 				g_error("%s.%d: neither nor", __FILE__, __LINE__);
 			}
 		} else { /* Linux */
@@ -901,6 +913,11 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 #define WAIT_FOR_EVENT(ev_struct, ev_type, timeout) \
 	event_set(&(ev_struct->event), ev_struct->fd, ev_type, network_mysqld_con_handle, user_data); \
 	chassis_event_add(srv, &(ev_struct->event)); 
+
+	/* add by vinchen/CFR */
+#define WAIT_FOR_EVENT_EX(ev_struct, ev_type, timeout) \
+	event_set(&(ev_struct->event), ev_struct->fd, ev_type, network_mysqld_con_handle, user_data); \
+	chassis_event_add_ex(srv, &(ev_struct->event));
 
 	/**
 	 * loop on the same connection as long as we don't end up in a stable state
@@ -922,9 +939,21 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 				network_mysqld_con_state_get_name(con->state));
 #endif
 
+		//g_message("thread id: %d, state: %d\n", );
+
+		//add by vinchen/CFR
+		if (con->server && con->server->backend_idx != -1 && con->server->disconnect_flag == 1)
+		{
+			con->state = CON_STATE_ERROR;
+		}
+		
+
 		MYSQLPROXY_STATE_CHANGE(event_fd, events, con->state);
 		switch (con->state) {
 		case CON_STATE_ERROR:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_ERROR\n");
+#endif // _VINCHEN_TEST_DETAIL
 			/* we can't go on, close the connection */
 			{
 				gchar *which_connection = "a"; /* some connection, don't know yet */
@@ -944,6 +973,9 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 			return;
 		case CON_STATE_CLOSE_CLIENT:
 		case CON_STATE_CLOSE_SERVER:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_COLSE\n");
+#endif // _VINCHEN_TEST_DETAIL
 			/* FIXME: this comment has nothing to do with reality...
 			 * the server connection is still fine, 
 			 * let's keep it open for reuse */
@@ -999,6 +1031,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			return;
 		case CON_STATE_INIT:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_INIT\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* if we are a proxy ask the remote server for the hand-shake packet 
 			 * if not, we generate one */
 			switch (plugin_call(srv, con, con->state)) {
@@ -1017,6 +1053,9 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			break;
 		case CON_STATE_CONNECT_SERVER:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_CONNECT_SERVER\n");
+#endif // _VINCHEN_TEST_DETAIL
 			switch ((retval = plugin_call(srv, con, con->state))) {
 			case NETWORK_SOCKET_SUCCESS:
 
@@ -1075,8 +1114,13 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 			 * read auth data from the remote mysql-server 
 			 */
 			network_socket *recv_sock;
+
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_HANDSHAKE\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			recv_sock = con->server;
-			g_assert(events == 0 || event_fd == recv_sock->fd);
+			g_assert(events == 0 || event_fd == recv_sock->fd || recv_sock->fd == -1);
 
 			switch (network_mysqld_read(srv, recv_sock)) {
 			case NETWORK_SOCKET_SUCCESS:
@@ -1118,6 +1162,9 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 	
 			break; }
 		case CON_STATE_SEND_HANDSHAKE: 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_HANDSHAKE\n");
+#endif // _VINCHEN_TEST_DETAIL
 			/* send the hand-shake to the client and wait for a response */
 
 			switch (network_mysqld_write(srv, con->client)) {
@@ -1150,12 +1197,17 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			break;
 		case CON_STATE_READ_AUTH: {
+
 			/* read auth from client */
 			network_socket *recv_sock;
 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_AUTH\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			recv_sock = con->client;
 
-			g_assert(events == 0 || event_fd == recv_sock->fd);
+			g_assert(events == 0 || event_fd == recv_sock->fd || recv_sock->fd == -1);
 
 			switch (network_mysqld_read(srv, recv_sock)) {
 			case NETWORK_SOCKET_SUCCESS:
@@ -1188,6 +1240,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			break; }
 		case CON_STATE_SEND_AUTH:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_AUTH\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* send the auth-response to the server */
 			switch (network_mysqld_write(srv, con->server)) {
 			case NETWORK_SOCKET_SUCCESS:
@@ -1224,7 +1280,11 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 			GString *packet;
 			recv_sock = con->server;
 
-			g_assert(events == 0 || event_fd == recv_sock->fd);
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_AUTH_RESULT\n");
+#endif // _VINCHEN_TEST_DETAIL
+
+			g_assert(events == 0 || event_fd == recv_sock->fd || recv_sock->fd == -1);
 
 			switch (network_mysqld_read(srv, recv_sock)) {
 			case NETWORK_SOCKET_SUCCESS:
@@ -1266,6 +1326,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			break; }
 		case CON_STATE_SEND_AUTH_RESULT: {
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_AUTH_RESULT\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* send the hand-shake to the client and wait for a response */
 
 			switch (network_mysqld_write(srv, con->client)) {
@@ -1296,6 +1360,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 				
 			break; }
 		case CON_STATE_READ_AUTH_OLD_PASSWORD: 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_AUTH_OLD_PASSWORD\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* read auth from client */
 			switch (network_mysqld_read(srv, con->client)) {
 			case NETWORK_SOCKET_SUCCESS:
@@ -1325,6 +1393,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			break; 
 		case CON_STATE_SEND_AUTH_OLD_PASSWORD:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_AUTH_OLD_PASSWORD\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* send the auth-response to the server */
 			switch (network_mysqld_write(srv, con->server)) {
 			case NETWORK_SOCKET_SUCCESS:
@@ -1358,16 +1430,20 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 			network_socket *recv_sock;
 			network_packet last_packet;
 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_QUERY\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			recv_sock = con->client;
 
-			g_assert(events == 0 || event_fd == recv_sock->fd);
+			g_assert(events == 0 || event_fd == recv_sock->fd || recv_sock->fd == -1);
 
 			do { 
 				switch (network_mysqld_read(srv, recv_sock)) {
 				case NETWORK_SOCKET_SUCCESS:
 					break;
 				case NETWORK_SOCKET_WAIT_FOR_EVENT:
-					WAIT_FOR_EVENT(con->client, EV_READ, NULL);
+					WAIT_FOR_EVENT_EX(con->client, EV_READ, NULL);
 					NETWORK_MYSQLD_CON_TRACK_TIME(con, "wait_for_event::read_query");
 					return;
 				case NETWORK_SOCKET_ERROR_RETRY:
@@ -1438,6 +1514,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			break; }
 		case CON_STATE_SEND_QUERY:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_QUERY\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* send the query to the server
 			 *
 			 * this state will loop until all the packets from the send-queue are flushed 
@@ -1463,7 +1543,7 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 			case NETWORK_SOCKET_SUCCESS:
 				break;
 			case NETWORK_SOCKET_WAIT_FOR_EVENT:
-				WAIT_FOR_EVENT(con->server, EV_WRITE, NULL);
+				WAIT_FOR_EVENT_EX(con->server, EV_WRITE, NULL);
 				NETWORK_MYSQLD_CON_TRACK_TIME(con, "wait_for_event::send_query");
 				return;
 			case NETWORK_SOCKET_ERROR_RETRY:
@@ -1494,6 +1574,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 				
 			break; 
 		case CON_STATE_READ_QUERY_RESULT: 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_QUERY_RESULT\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* read all packets of the resultset 
 			 *
 			 * depending on the backend we may forward the data to the client right away
@@ -1503,13 +1587,13 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 				recv_sock = con->server;
 
-				g_assert(events == 0 || event_fd == recv_sock->fd);
+				g_assert(events == 0 || event_fd == recv_sock->fd || recv_sock->fd == -1);
 
 				switch (network_mysqld_read(srv, recv_sock)) {
 				case NETWORK_SOCKET_SUCCESS:
 					break;
 				case NETWORK_SOCKET_WAIT_FOR_EVENT:
-					WAIT_FOR_EVENT(con->server, EV_READ, NULL);
+					WAIT_FOR_EVENT_EX(con->server, EV_READ, NULL);
 				NETWORK_MYSQLD_CON_TRACK_TIME(con, "wait_for_event::read_query_result");
 					return;
 				case NETWORK_SOCKET_ERROR_RETRY:
@@ -1545,13 +1629,17 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 	
 			break; 
 		case CON_STATE_SEND_QUERY_RESULT:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_QUERY_RESULT\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/**
 			 * send the query result-set to the client */
 			switch (network_mysqld_write(srv, con->client)) {
 			case NETWORK_SOCKET_SUCCESS:
 				break;
 			case NETWORK_SOCKET_WAIT_FOR_EVENT:
-				WAIT_FOR_EVENT(con->client, EV_WRITE, NULL);
+				WAIT_FOR_EVENT_EX(con->client, EV_WRITE, NULL);
 				NETWORK_MYSQLD_CON_TRACK_TIME(con, "wait_for_event::send_query_result");
 				return;
 			case NETWORK_SOCKET_ERROR_RETRY:
@@ -1599,6 +1687,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			recv_sock = con->client;
 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_LOCAL_INFILE_DATA\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/**
 			 * LDLI is usually a whole set of packets
 			 */
@@ -1639,6 +1731,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 	
 			break; }
 		case CON_STATE_SEND_LOCAL_INFILE_DATA: 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_LOCAL_INFILE_DATA\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* send the hand-shake to the client and wait for a response */
 
 			switch (network_mysqld_write(srv, con->server)) {
@@ -1680,7 +1776,12 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 			 */
 			network_socket *recv_sock;
 			recv_sock = con->server;
-			g_assert(events == 0 || event_fd == recv_sock->fd);
+
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_READ_LOCAL_INFILE_RESULT\n");
+#endif // _VINCHEN_TEST_DETAIL
+
+			g_assert(events == 0 || event_fd == recv_sock->fd || recv_sock->fd == -1);
 
 			switch (network_mysqld_read(srv, recv_sock)) {
 			case NETWORK_SOCKET_SUCCESS:
@@ -1718,6 +1819,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 	
 			break; }
 		case CON_STATE_SEND_LOCAL_INFILE_RESULT: 
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_LOCAL_INFILE_RESULT\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/* send the hand-shake to the client and wait for a response */
 
 			switch (network_mysqld_write(srv, con->client)) {
@@ -1754,6 +1859,10 @@ void network_mysqld_con_handle(int event_fd, short events, void *user_data) {
 
 			break;
 		case CON_STATE_SEND_ERROR:
+#ifdef _VINCHEN_TEST_DETAIL
+			g_message("CON_STATE_SEND_ERROR\n");
+#endif // _VINCHEN_TEST_DETAIL
+
 			/**
 			 * send error to the client
 			 * and close the connections afterwards
@@ -1803,6 +1912,7 @@ void network_mysqld_con_accept(int G_GNUC_UNUSED event_fd, short events, void *u
 
 	g_assert(events == EV_READ);
 	g_assert(listen_con->server);
+
 
 	client = network_socket_accept(listen_con->server);
 	if (!client) return;

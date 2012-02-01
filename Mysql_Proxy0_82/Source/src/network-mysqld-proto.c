@@ -589,6 +589,43 @@ int network_mysqld_proto_get_gstring(network_packet *packet, GString *out) {
 }
 
 /**
+ * get a NUL-terminated GString or the last part (protocal 4.0 <non NUL-terminated>) from the network packet
+ *
+ * add by Vinchen/CFR
+ *
+ * @param packet the MySQL network packet
+ * @param out    a GString which carries the string
+ * @return       a pointer to the string in out
+ *
+ * @see network_mysqld_proto_get_gstring_len()
+ */
+int network_mysqld_proto_get_tail_gstring(network_packet *packet, GString *out) {
+	guint64 len;
+	int err = 0;
+	int has_null_flag = 1;
+
+	for (len = 0; packet->offset + len < packet->data->len && *(packet->data->str + packet->offset + len) != '\0'; len++);
+
+	if (packet->offset + len == packet->data->len) { /* havn't found a trailing \0 */
+		has_null_flag = 0;
+	}
+
+	if (len > 0) {
+		g_assert(packet->offset < packet->data->len);
+		g_assert(packet->offset + len <= packet->data->len);
+
+		err = err || network_mysqld_proto_get_gstring_len(packet, len, out);
+	}
+
+	if (has_null_flag) {
+		/* skip the \0 */
+		err = err || network_mysqld_proto_skip(packet, 1);
+	}
+
+	return err ? -1 : 0;
+}
+
+/**
  * get a variable-length GString from the network packet
  *
  * @param packet the MySQL network packet

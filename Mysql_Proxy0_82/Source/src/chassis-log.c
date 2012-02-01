@@ -116,6 +116,19 @@ int chassis_log_set_level(chassis_log *log, const gchar *level) {
 	return -1;
 }
 
+//add by vinchen/CFR
+char* chassis_log_get_level_name(int	log_level) {
+	gint	i;
+
+	for (i = 0; log_lvl_map[i].name; i++) {
+		if (log_lvl_map[i].lvl == log_level) {
+			return log_lvl_map[i].name;
+		}
+	}
+
+	return NULL;
+}
+
 /**
  * open the log-file
  *

@@ -63,11 +63,12 @@ typedef struct {
 	} addr;
 
 	GString *name; 
-	network_socklen_t len;
+	network_socklen_t len;	
 	gboolean can_unlink_socket; /* set TRUE *only* after successful bind */
 } network_address;
 
 NETWORK_API network_address *network_address_new(void);
+NETWORK_API gint network_address_set_address_ip(network_address *addr, const gchar *address, guint port);		//add by vinchen/CFR
 NETWORK_API void network_address_free(network_address *);
 NETWORK_API void network_address_reset(network_address *addr);
 NETWORK_API network_address *network_address_copy(network_address *dst, network_address *src);

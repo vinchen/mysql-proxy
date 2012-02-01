@@ -241,4 +241,25 @@ gboolean g_memeq(const char *a, gsize a_len, const char *b, gsize b_len) {
 	return (0 == memcmp(a, b, b_len));
 }
 
+//add by vinchen/CFR
+void
+g_ptr_array_free_all(
+	GPtrArray*							array,
+	g_ptr_array_element_free_func_t		free_func
+)
+{
+	void*		element;
+	guint		i;
 
+	if (free_func != NULL)
+	{
+		for(i = 0; i < array->len; ++i)
+		{
+			element = g_ptr_array_index(array, i);
+
+			free_func(element);
+		}
+	}
+	
+	g_ptr_array_free(array, TRUE);
+}

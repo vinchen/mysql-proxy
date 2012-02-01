@@ -102,7 +102,8 @@ void network_address_reset(network_address *addr) {
 	addr->len = sizeof(addr->addr.common);
 }
 
-static gint network_address_set_address_ip(network_address *addr, const gchar *address, guint port) {
+//edit by vinchen/CFR, non-static
+gint network_address_set_address_ip(network_address *addr, const gchar *address, guint port) {
 	g_return_val_if_fail(addr, -1);
 
 	if (port > 65535) {

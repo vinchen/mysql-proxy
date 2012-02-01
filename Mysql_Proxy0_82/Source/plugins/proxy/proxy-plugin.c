@@ -185,7 +185,7 @@ struct chassis_plugin_config {
 
 	gint start_proxy;
 
-	network_mysqld_con *listen_con;
+	network_mysqld_con*		listen_con;
 };
 
 
@@ -642,6 +642,8 @@ NETWORK_MYSQLD_PLUGIN_PROTO(proxy_read_auth) {
 	}
 	if (!(auth->capabilities & CLIENT_PROTOCOL_41)) {
 		/* should use packet-id 0 */
+		g_message("4.0 protocol is not supported\n");
+
 		network_mysqld_queue_append(con->client, con->client->send_queue, C("\xff\xd7\x07" "4.0 protocol is not supported"));
 		network_mysqld_auth_response_free(auth);
 		return NETWORK_SOCKET_ERROR;
@@ -1186,7 +1188,34 @@ NETWORK_MYSQLD_PLUGIN_PROTO(proxy_read_query) {
 	}
 
 	if (proxy_query) {
-		con->state = CON_STATE_SEND_QUERY;
+		/* 对于每指定lua时，如果后端状态不为up，需要重连 add by vinchen/CFR*/
+		if (ret == PROXY_NO_DECISION){
+//			network_backend_t*		backend;
+			int						idx = 0;
+
+			g_assert(con->server);
+			idx = con->server->backend_idx;
+			g_assert(idx != -1);
+
+			if (idx == -1)
+			{
+				g_critical("%s: backend index shouldn't be -1", G_STRLOC);
+				con->state = CON_STATE_ERROR;
+				return NETWORK_SOCKET_ERROR;
+			}
+
+			//backend = g_ptr_array_index(con->srv->priv->backends->backends, idx);
+
+			if (con->server->disconnect_flag){
+				con->state = CON_STATE_ERROR;
+			} else {
+				con->state = CON_STATE_SEND_QUERY;
+			}
+
+		} else{
+			con->state = CON_STATE_SEND_QUERY;
+		}
+		
 	} else {
 		GList *cur;
 
@@ -1509,6 +1538,14 @@ NETWORK_MYSQLD_PLUGIN_PROTO(proxy_connect_server) {
 
 			/* mark the backend as being DOWN and retry with a different one */
 			st->backend->state = BACKEND_STATE_DOWN;
+
+// 			g_mutex_lock(con->srv->priv->backends->backends_mutex);			//edit by vinchen/CFR, if not is down ,set to unknown
+// 			if (st->backend->state != BACKEND_STATE_DOWN){
+// 				//g_assert(con->srv->priv->backends->backends->len == 1);		//如果这样修改后，多后端就没意义了！先断言(makebe question)			
+// 				st->backend->state = BACKEND_STATE_UNKNOWN;
+// 			}
+// 			g_mutex_unlock(con->srv->priv->backends->backends_mutex);
+
 			chassis_gtime_testset_now(&st->backend->state_since, NULL);
 			network_socket_free(con->server);
 			con->server = NULL;
@@ -1532,7 +1569,8 @@ NETWORK_MYSQLD_PLUGIN_PROTO(proxy_connect_server) {
 	st->backend = NULL;
 	st->backend_ndx = -1;
 
-	network_backends_check(g->backends);
+	//cancle the every 4 seconds to check the down backends , edit by vinchen/CFR
+	//network_backends_check(g->backends);
 
 	switch (proxy_lua_connect_server(con)) {
 	case PROXY_SEND_RESULT:
@@ -1623,16 +1661,18 @@ NETWORK_MYSQLD_PLUGIN_PROTO(proxy_connect_server) {
 	 */
 	if (NULL == con->server) {
 		con->server = network_socket_new();
+
 		network_address_copy(con->server->dst, st->backend->addr);
-	
 		st->backend->connected_clients++;
 
 		switch(network_socket_connect(con->server)) {
 		case NETWORK_SOCKET_ERROR_RETRY:
 			/* the socket is non-blocking already, 
 			 * call getsockopt() to see if we are done */
+			con->server->backend_idx = st->backend_ndx; /* add by vinchen/CFR，在socket建立以后赋值 */
 			return NETWORK_SOCKET_ERROR_RETRY;
 		case NETWORK_SOCKET_SUCCESS:
+			con->server->backend_idx = st->backend_ndx; /* add by vinchen/CFR，在socket建立以后赋值 */
 			break;
 		default:
 			g_message("%s.%d: connecting to backend (%s) failed, marking it as down for ...", 
@@ -1647,7 +1687,8 @@ NETWORK_MYSQLD_PLUGIN_PROTO(proxy_connect_server) {
 			return NETWORK_SOCKET_ERROR_RETRY;
 		}
 
-		if (st->backend->state != BACKEND_STATE_UP) {
+		//g_assert(st->backend->state != BACKEND_STATE_DOWN);		//add by vinchen/CFR
+		if (st->backend->state == BACKEND_STATE_UNKNOWN) {		//edit down to unknow by vinchen/CFR
 			st->backend->state = BACKEND_STATE_UP;
 			chassis_gtime_testset_now(&st->backend->state_since, NULL);
 		}
@@ -2053,9 +2094,9 @@ static GOptionEntry * network_mysqld_proxy_plugin_get_options(chassis_plugin_con
  * init the plugin with the parsed config
  */
 int network_mysqld_proxy_plugin_apply_config(chassis *chas, chassis_plugin_config *config) {
-	network_mysqld_con *con;
-	network_socket *listen_sock;
-	chassis_private *g = chas->priv;
+	network_mysqld_con*		con;
+	network_socket*			listen_sock;
+	chassis_private *		g = chas->priv;
 	guint i;
 
 	if (!config->start_proxy) {
@@ -2076,7 +2117,7 @@ int network_mysqld_proxy_plugin_apply_config(chassis *chas, chassis_plugin_confi
 	con->config = config;
 
 	config->listen_con = con;
-	
+
 	listen_sock = network_socket_new();
 	con->server = listen_sock;
 
@@ -2091,7 +2132,7 @@ int network_mysqld_proxy_plugin_apply_config(chassis *chas, chassis_plugin_confi
 		return -1;
 	}
 	g_message("proxy listening on port %s", config->address);
-
+	
 	for (i = 0; config->backend_addresses && config->backend_addresses[i]; i++) {
 		if (-1 == network_backends_add(g->backends, config->backend_addresses[i],
 				BACKEND_TYPE_RW)) {
@@ -2120,6 +2161,90 @@ int network_mysqld_proxy_plugin_apply_config(chassis *chas, chassis_plugin_confi
 	return 0;
 }
 
+gchar*		ini_str_proxy = 
+"#########Proxy Options#########\n\
+%sproxy-address=%s\n\
+    #*The listening proxy server host and port(P for short)\n\
+%sproxy-backend-addresses=%s\n\
+    #*The MySQL server host and port(b for short)\n\
+%sproxy-read-only-backend-addresses=%s\n\
+    #The MySQL server host and port (read only)\n\
+%sproxy-lua-script=%s\n\
+    #Filename for Lua script for proxy operations\n\
+%sproxy-fix-bug-25371 = true\n\
+    #Enable the fix bug #25371 (mysqld > 5.1.12) for older libmysql versions\n\
+%sproxy-pool-no-change-user = false\n\
+    #Do not use the protocol CHANGE_USER command to reset the connection when coming from the connection pool\n\
+%sproxy-skip-profiling = false\n\
+    #Disable query profiling\n\
+%sno-proxy = false\n\
+    #Do not start the proxy module\n\
+\n";
+
+//add by vinchen/CFR
+void
+network_mysqld_proxy_plugin_get_ini_str(
+	gchar*					buf,                    //make sure the buf is enough
+    guint                   len,
+	chassis_plugin_config*	proxy_config,
+    chassis*                srv
+)
+{
+    GString*			backends_str = NULL;
+    GString*			r_backends_str = NULL;
+    gint				backends_cnt = 0;
+    gint				r_backends_cnt = 0;
+    guint               i;
+    network_backend_t*	backend = NULL;
+
+    for (i = 0; i < srv->priv->backends->backends->len; ++i)
+    {
+        backend = g_ptr_array_index(srv->priv->backends->backends, i);
+        if (backend->type == BACKEND_TYPE_RW)
+        {
+            if (backends_cnt++ == 0)
+            {
+                backends_str = g_string_new_len(NULL, 100);
+                g_string_append(backends_str, backend->addr->name->str);
+            }
+            else
+            {
+                g_assert(backends_str);
+                g_string_append(backends_str, ",");
+                g_string_append(backends_str, backend->addr->name->str);
+            }
+        }
+        else if (backend->type == BACKEND_TYPE_RO)
+        {
+            if (r_backends_cnt++ == 0)
+            {
+                r_backends_str = g_string_new_len(NULL, 100);
+                g_string_append(r_backends_str, backend->addr->name->str);
+            }
+            else
+            {
+                g_assert(r_backends_str);
+                g_string_append(r_backends_str, ",");
+                g_string_append(r_backends_str, backend->addr->name->str);
+            }
+        }
+        else
+            g_assert(0);
+    }
+
+    //g_string_sprintf(
+
+    sprintf(buf, ini_str_proxy, 
+        proxy_config->address ? "" : "#",						proxy_config->address ? proxy_config->address : "0.0.0.0:4040",
+        backends_str ? "" : "#",				                backends_str ? backends_str->str : "ip:port",
+        r_backends_str ? "" : "#",				                r_backends_str ? r_backends_str->str : "ip:port",
+        proxy_config->lua_script ? "" : "#",	                proxy_config->lua_script ? proxy_config->lua_script : "file_name",
+        proxy_config->fix_bug_25371 ? "" : "#",
+        proxy_config->pool_change_user == 0 ? "" : "#",
+        proxy_config->profiling == 0 ? "" : "#",
+        proxy_config->start_proxy == 0 ? "" : "#");
+}
+
 G_MODULE_EXPORT int plugin_init(chassis_plugin *p) {
 	p->magic        = CHASSIS_PLUGIN_MAGIC;
 	p->name         = g_strdup("proxy");
@@ -2129,6 +2254,7 @@ G_MODULE_EXPORT int plugin_init(chassis_plugin *p) {
 	p->get_options  = network_mysqld_proxy_plugin_get_options;
 	p->apply_config = network_mysqld_proxy_plugin_apply_config;
 	p->destroy      = network_mysqld_proxy_plugin_free;
+	p->get_ini_str  = network_mysqld_proxy_plugin_get_ini_str;			//add by vinchen/CFR
 
 	return 0;
 }

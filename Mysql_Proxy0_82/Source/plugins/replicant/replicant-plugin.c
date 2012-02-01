@@ -830,6 +830,7 @@ G_MODULE_EXPORT int plugin_init(chassis_plugin *p) {
 	p->get_options  = network_mysqld_replicant_plugin_get_options;
 	p->apply_config = network_mysqld_replicant_plugin_apply_config;
 	p->destroy      = network_mysqld_replicant_plugin_free;
+    p->get_ini_str  = NULL;
 
 	return 0;
 }

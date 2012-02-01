@@ -1354,7 +1354,7 @@ int network_mysqld_proto_get_auth_response(network_packet *packet, network_mysql
 		err = err || network_mysqld_proto_get_gstring(packet, auth->username);
 		/* there may be no password sent */
 		if (packet->data->len != packet->offset) {
-			err = err || network_mysqld_proto_get_gstring(packet, auth->response);
+			err = err || network_mysqld_proto_get_tail_gstring(packet, auth->response); /* edit by vinchen/CFR for protocal 4.0 */
 		}
 
 		if (!err) {

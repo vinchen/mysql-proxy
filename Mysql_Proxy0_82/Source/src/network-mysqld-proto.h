@@ -107,6 +107,7 @@ NETWORK_API int network_mysqld_proto_get_string(network_packet *packet, gchar **
 NETWORK_API int network_mysqld_proto_get_lenenc_gstring(network_packet *packet, GString *out);
 NETWORK_API int network_mysqld_proto_get_gstring_len(network_packet *packet, gsize len, GString *out);
 NETWORK_API int network_mysqld_proto_get_gstring(network_packet *packet, GString *out);
+NETWORK_API int network_mysqld_proto_get_tail_gstring(network_packet *packet, GString *out);  /* add by vinchen/CFR for protocol 4.0*/
 
 NETWORK_API int network_mysqld_proto_peek_lenenc_type(network_packet *packet, network_mysqld_lenenc_type *type);
 NETWORK_API int network_mysqld_proto_get_lenenc_int(network_packet *packet, guint64 *v);

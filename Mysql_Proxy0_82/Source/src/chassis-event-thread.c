@@ -89,6 +89,24 @@ void chassis_event_op_apply(chassis_event_op_t *op, struct event_base *event_bas
 	}
 }
 
+//add by vinchen/CFR
+#include <stdlib.h>
+
+int chassis_event_get_random_int() {
+	unsigned int thread_id;
+
+#ifdef WIN32
+	thread_id = (unsigned int) GetCurrentThreadId();
+#else
+	thread_id = (unsigned int)pthread_self();
+#endif // WIN32
+
+	srand(((unsigned long)time(NULL) + (thread_id & 0x0000FFFF)) * (thread_id % 13));
+
+	return rand();
+}
+
+
 /**
  * add a event asynchronously
  *
@@ -98,13 +116,30 @@ void chassis_event_op_apply(chassis_event_op_t *op, struct event_base *event_bas
  * @see network_mysqld_con_handle()
  */
 void chassis_event_add(chassis *chas, struct event *ev) {
-	chassis_event_op_t *op = chassis_event_op_new();
+// 	chassis_event_op_t *op = chassis_event_op_new();
+// 
+// 	op->type = CHASSIS_EVENT_OP_ADD;
+// 	op->ev   = ev;
+// 	g_async_queue_push(chas->threads->event_queue, op);
+// 
+// 	send(chas->threads->event_notify_fds[1], C("."), 0); /* ping the event handler */
 
-	op->type = CHASSIS_EVENT_OP_ADD;
-	op->ev   = ev;
-	g_async_queue_push(chas->threads->event_queue, op);
+	/* 
+		modified by vinchen/CFR
+		use random num to determin the handle thread's event_base.
+		because libevent 2.0 or higher is thread-safe, it's safe to do this
+	*/
+	gint32 r_num = chassis_event_get_random_int() % chas->event_thread_count;
+	chassis_event_thread_t*	event_thread;
 
-	send(chas->threads->event_notify_fds[1], C("."), 0); /* ping the event handler */
+	event_thread = chas->threads->event_threads->pdata[r_num];
+
+#ifdef _VINCHEN_TEST
+	event_thread->event_add_cnt++;			/* add by vinchen/CFR, for debug */
+#endif // _VINCHEN_TEST
+
+	event_base_set(event_thread->event_base, ev);
+	event_add(ev, NULL);
 }
 
 GPrivate *tls_event_base_key = NULL;
@@ -135,6 +170,25 @@ void chassis_event_add_local(chassis G_GNUC_UNUSED *chas, struct event *ev) {
 }
 
 /**
+ * add a event to event base of current thread add by vinchen/CFR
+ *
+ * the event is added to current event-threads to handle it
+ *
+ * @see network_mysqld_con_handle()
+ */
+void chassis_event_add_ex(chassis *chas, struct event *ev) {
+	struct event_base *event_base;
+
+	event_base = g_private_get(tls_event_base_key);
+
+	g_assert(event_base); /* the thread-local event-base has to be initialized */
+
+	event_base_set(event_base, ev);
+	event_add(ev, NULL);
+
+}
+
+/**
  * handled events sent through the global event-queue 
  *
  * each event-thread has its own listener on the event-queue and 
@@ -158,6 +212,8 @@ void chassis_event_handle(int G_GNUC_UNUSED event_fd, short G_GNUC_UNUSED events
 
 		received++;
 	}
+
+	//g_message("");
 
 	/* the pipe has one . per event, remove as many as we received */
 	while (received > 0 && 
@@ -196,6 +252,10 @@ void chassis_event_thread_free(chassis_event_thread_t *event_thread) {
 
 	/* we don't want to free the global event-base */
 	if (is_thread && event_thread->event_base) event_base_free(event_thread->event_base);
+
+#ifdef _VINCHEN_TEST
+	g_message("thread event count %u\n", event_thread->event_add_cnt); //add by vinchen/CFR
+#endif
 
 	g_free(event_thread);
 }
@@ -304,6 +364,7 @@ int chassis_event_threads_init_thread(chassis_event_threads_t *threads, chassis_
 #endif
 	event_thread->event_base = event_base_new();
 	event_thread->chas = chas;
+
 #ifdef WIN32
 	lpProtocolInfo = g_malloc(sizeof(WSAPROTOCOL_INFO));
 	if (SOCKET_ERROR == WSADuplicateSocket(threads->event_notify_fds[0], GetCurrentProcessId(), lpProtocolInfo)) {

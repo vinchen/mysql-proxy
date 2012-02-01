@@ -109,11 +109,14 @@ network_socket *network_socket_new() {
 
 	s->default_db = g_string_new(NULL);
 	s->fd           = -1;
+	s->fd_bak		= -1;			/* add by vinchen/CFR */
 	s->socket_type  = SOCK_STREAM; /* let's default to TCP */
 	s->packet_id_is_reset = TRUE;
 
 	s->src = network_address_new();
 	s->dst = network_address_new();
+	s->backend_idx = -1;			/* add by vinchen/CFR */
+	s->disconnect_flag	= 0;
 
 	return s;
 }
@@ -135,6 +138,11 @@ void network_socket_free(network_socket *s) {
 
 	if (s->fd != -1) {
 		closesocket(s->fd);
+	}
+	
+	//add by vinchen/CFR for reload configure
+	if (s->fd_bak != -1) {
+		closesocket(s->fd_bak);
 	}
 
 	g_string_free(s->default_db, TRUE);

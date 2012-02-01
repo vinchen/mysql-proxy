@@ -73,10 +73,14 @@ typedef struct network_mysqld_auth_response network_mysqld_auth_response;
 
 typedef struct {
 	int fd;             /**< socket-fd */
+	int fd_bak;			/* add by vinchen/CFR for reload configure */
 	struct event event; /**< events for this fd */
 
 	network_address *src; /**< getsockname() */
 	network_address *dst; /**< getpeername() */
+
+	int	backend_idx;		/* add by vinchen/CFR to delicate the server's backend index */
+	gboolean	disconnect_flag;
 
 	int socket_type; /**< SOCK_STREAM or SOCK_DGRAM for now */
 

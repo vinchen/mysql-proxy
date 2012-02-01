@@ -365,7 +365,6 @@ NETWORK_API void network_mysqld_con_free(network_mysqld_con *con);
  * should be socket 
  */
 NETWORK_API void network_mysqld_con_accept(int event_fd, short events, void *user_data); /** event handler for accept() */
-
 NETWORK_API int network_mysqld_con_send_ok(network_socket *con);
 NETWORK_API int network_mysqld_con_send_ok_full(network_socket *con, guint64 affected_rows, guint64 insert_id, guint16 server_status, guint16 warnings);
 NETWORK_API int network_mysqld_con_send_error(network_socket *con, const gchar *errmsg, gsize errmsg_len);
@@ -384,6 +383,8 @@ NETWORK_API network_socket_retval_t network_mysqld_write_len(chassis *srv, netwo
 NETWORK_API network_socket_retval_t network_mysqld_con_get_packet(chassis G_GNUC_UNUSED*chas, network_socket *con);
 
 struct chassis_private {
+
+	GMutex	  *cons_mutex;					  /* add by vinchen/CFR, for cons's thread_safe */
 	GPtrArray *cons;                          /**< array(network_mysqld_con) */
 
 	lua_scope *sc;

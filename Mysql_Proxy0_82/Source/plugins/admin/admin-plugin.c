@@ -287,6 +287,874 @@ NETWORK_MYSQLD_PLUGIN_PROTO(server_read_auth) {
 	return NETWORK_SOCKET_SUCCESS;
 }
 
+//////////////////////////////////////////////////////////////////////////
+/* add by vinchen/CFR */
+
+//same with proxy-plugin's chassis_plugin_config
+// struct chassis_proxy_plugin_config {
+// 	gchar *address;                   /**< listening address of the proxy */
+// 
+// 	gchar **backend_addresses;        /**< read-write backends */
+// 	gchar **read_only_backend_addresses; /**< read-only  backends */
+// 
+// 	gint fix_bug_25371;               /**< suppress the second ERR packet of bug #25371 */
+// 
+// 	gint profiling;                   /**< skips the execution of the read_query() function */
+// 	
+// 	gchar *lua_script;                /**< script to load at the start the connection */
+// 
+// 	gint pool_change_user;            /**< don't reset the connection, when a connection is taken from the pool
+// 					       - this safes a round-trip, but we also don't cleanup the connection
+// 					       - another name could be "fast-pool-connect", but that's too friendly
+// 					       */
+// 
+// 	gint start_proxy;
+// 
+// 	network_mysqld_con*		listen_con;
+// };
+
+gchar*		ini_str_header = 
+"[mysql-proxy]\n\
+#* mean that you should always set the parameter\n\
+\n";
+
+gchar*		ini_str_admin = 
+"########Admin Options#########\n\
+%sadmin-address=%s\n\
+    #*The admin module listening host and port(Default:0.0.0.0:4041)\n\
+%sadmin-username=%s\n\
+    #*Authentication user name for admin module\n\
+%sadmin-password=%s\n\
+    #*Authentication password for admin module\n\
+%sadmin-lua-script=%s\n\
+    #*Script to execute by the admin module\n\
+\n";
+
+// gchar*		ini_str_proxy1 = 
+// "#########Proxy Options#########\n\
+// %sproxy-address=%s\n\
+//     #*The listening proxy server host and port(P for short)\n\
+// %sproxy-backend-addresses=%s\n\
+//     #*The MySQL server host and port(b for short)\n\
+// %sproxy-read-only-backend-addresses=%s\n\
+//     #The MySQL server host and port (read only)\n\
+// %sproxy-lua-script=%s\n\
+//     #Filename for Lua script for proxy operations\n";
+// 
+// gchar*		ini_str_proxy2 =
+// "%sproxy-fix-bug-25371 = true\n\
+//     #Enable the fix bug #25371 (mysqld > 5.1.12) for older libmysql versions\n\
+// %sproxy-pool-no-change-user = false\n\
+//     #Do not use the protocol CHANGE_USER command to reset the connection when coming from the connection pool\n\
+// %sproxy-skip-profiling = false\n\
+//     #Disable query profiling\n\
+// %sno-proxy = false\n\
+//     #Do not start the proxy module\n\
+// \n";
+
+gchar*		ini_str_app1 = 
+"#########Applications Options#########\n\
+%sbasedir=%s\n\
+    #The base directory prefix for paths in the configuration(Default: dir of Mysql-proxy executable file, or should be absolute path)\n\
+%sevent-threads = %d\n\
+    #*The number of event-handling threads(Default 1, prefer to prime number)\n\
+%slog-file=%s\n\
+    #*The file where error messages are logged\n\
+%slog-level=%s\n\
+    #*The logging level(Should be error, critical, warning, info, message, debug, Default critical)\n\
+%splugins=%s\n\
+    #*List of plugins to load\n\
+%skeepalive = true\n\
+    #*Try to restart the proxy if a crash occurs\n\
+%sdaemon = true\n\
+    #*Start in daemon mode\n";
+
+gchar*		ini_str_app2 =
+"%smax-open-files=%d\n\
+    #The maximum number of open files to support(Default 0, limit by OS)\n\
+%slua-cpath=%s\n\
+    #Set the LUA_CPATH\n\
+%slua-path=%s\n\
+    #Set the LUA_PATH   \n\
+%slog-back-trace-on-crash = true\n\
+    #*Try to invoke the debugger and generate a backtrace on crash\n\
+%slog-use-syslog = true\n\
+    #Log errors to syslog  \n\
+%spid-file=%s\n\
+    #File in which to store the process ID\n\
+%splugin-dir=%s\n\
+    #Directory containing plugin files\n\
+%suser=%s\n\
+    #The user to use when running mysql-proxy\n";
+
+#define EC_ADMIN_RELOAD_SUCCESS	0
+#define EC_ADMIN_RELOAD_FAIL	1
+#define EC_ADMIN_RELOAD_NO_CONS_FILE 2
+#define EC_ADMIN_RELOAD_WIRTE_FILE_FAIL	3
+#define EC_ADMIN_RELOAD_UNKNOWN	4
+
+void
+network_mysqld_admin_plugin_get_ini_str(
+	gchar*				    buf,
+    guint                   buf_len,
+    chassis_plugin_config*  config,
+    chassis*                srv
+)
+{
+	sprintf(buf, ini_str_admin, 
+		config->address ? "" : "#",         config->address ? config->address : "0.0.0.0:4041",
+		config->admin_username ? "" : "#",  config->admin_username ? config->admin_username : "proxy",
+		config->admin_password ? "" : "#",  config->admin_password ? config->admin_password : "proxy",
+		config->lua_script ? "" : "#",      config->lua_script ? config->lua_script : "admin.lua");
+}
+
+
+int		
+admin_configure_flush_to_file(
+	chassis*			srv							  
+)
+{
+	GString*			new_str = NULL;
+	GString*			backends_str = NULL;
+	GString*			r_backends_str = NULL;
+// 	gint				backends_cnt = 0;
+// 	gint				r_backends_cnt = 0;
+	gchar				buf[65535];
+	gchar				plugins_buf[1000];
+	guint				i;
+	chassis_plugin*		plugin;
+	chassis_plugin*		admin_plugin = NULL;
+	chassis_plugin*		proxy_plugin = NULL;
+//	network_backend_t*	backend = NULL;
+//	struct chassis_proxy_plugin_config*		proxy_config;
+	FILE*				ini_file = NULL;
+	int					ret;
+
+	if (!srv->default_file)
+		return EC_ADMIN_RELOAD_NO_CONS_FILE;
+
+	new_str = g_string_new_len(NULL, 100000);
+
+	g_string_append(new_str, ini_str_header);
+
+	g_assert(srv->modules->len <= 2);
+	
+	//find plugins
+	for (i = 0; i < srv->modules->len; ++i)
+	{
+		plugin = g_ptr_array_index(srv->modules, i);
+
+		if (strcmp(plugin->name, "admin") == 0)
+			admin_plugin = plugin;
+		else if (strcmp(plugin->name, "proxy") == 0)
+			proxy_plugin = plugin;
+		else
+			g_assert(0);
+
+		if (i == 0)
+			strcpy(plugins_buf, plugin->name);
+		else
+		{
+			strcat(plugins_buf, ", ");
+			strcat(plugins_buf, plugin->name);
+		}
+	}
+
+	//find_backends
+// 	for (i = 0; i < srv->priv->backends->backends->len; ++i)
+// 	{
+// 		backend = g_ptr_array_index(srv->priv->backends->backends, i);
+// 		if (backend->type == BACKEND_TYPE_RW)
+// 		{
+// 			if (backends_cnt++ == 0)
+// 			{
+// 				backends_str = g_string_new_len(NULL, 100);
+// 				g_string_append(backends_str, backend->addr->name->str);
+// 			}
+// 			else
+// 			{
+// 				g_assert(backends_str);
+// 				g_string_append(backends_str, ",");
+// 				g_string_append(backends_str, backend->addr->name->str);
+// 			}
+// 		}
+// 		else if (backend->type == BACKEND_TYPE_RO)
+// 		{
+// 			if (r_backends_cnt++ == 0)
+// 			{
+// 				r_backends_str = g_string_new_len(NULL, 100);
+// 				g_string_append(r_backends_str, backend->addr->name->str);
+// 			}
+// 			else
+// 			{
+// 				g_assert(r_backends_str);
+// 				g_string_append(r_backends_str, ",");
+// 				g_string_append(r_backends_str, backend->addr->name->str);
+// 			}
+// 		}
+// 		else
+// 			g_assert(0);
+// 	}
+
+	g_assert(proxy_plugin != NULL);
+	
+	///////////////////admin
+    if (admin_plugin != NULL)
+    {
+        admin_plugin->get_ini_str(buf, 65535, admin_plugin->config, srv);
+        g_string_append(new_str, buf);
+    }
+
+	///////////////////proxy
+    if (proxy_plugin != NULL)
+    {
+        proxy_plugin->get_ini_str(buf, 65535, proxy_plugin->config, srv);
+        g_string_append(new_str, buf);
+    }
+// 	proxy_config = (struct chassis_proxy_plugin_config*)proxy_plugin->config;
+// 
+// 	sprintf(buf, ini_str_proxy1, 
+// 		proxy_plugin ? "" : "#",								proxy_plugin ? proxy_config->address : "0.0.0.0:4040",
+// 		proxy_plugin && backends_str ? "" : "#",				proxy_plugin && backends_str ? backends_str->str : "ip:port",
+// 		proxy_plugin && r_backends_str ? "" : "#",				proxy_plugin && r_backends_str ? r_backends_str->str : "ip:port",
+// 		proxy_plugin && proxy_config->lua_script ? "" : "#",	proxy_plugin && proxy_config->lua_script ? proxy_config->lua_script : "file_name");
+// 
+// 	g_string_append(new_str, buf);
+// 	
+// 	sprintf(buf, ini_str_proxy2,
+// 		proxy_plugin && proxy_config->fix_bug_25371 ? "" : "#",
+// 		proxy_plugin && proxy_config->pool_change_user == 0 ? "" : "#",
+// 		proxy_plugin && proxy_config->profiling == 0 ? "" : "#",
+// 		proxy_plugin && proxy_config->start_proxy == 0 ? "" : "#");
+// 	g_string_append(new_str, buf);
+
+	///////////////////app
+	g_assert(srv->event_thread_count > 0);
+	sprintf(buf, ini_str_app1,
+		srv->base_dir_org ? "" : "#",			srv->base_dir_org ? srv->base_dir_org : "base_dir_path",
+		"", srv->event_thread_count,
+ 		srv->log_file_name_org ? "" : "#",		srv->log_file_name_org ? srv->log_file_name_org : "log_file_name",
+ 		"",										chassis_log_get_level_name(srv->log->min_lvl),
+ 		"",										plugins_buf,
+#ifndef _WIN32
+ 		srv->auto_restart ? "" : "#",
+ 		srv->daemon_mode ? "" : "#");
+#else
+ 		"#",
+ 		"#");
+#endif
+
+	g_string_append(new_str, buf);
+
+	sprintf(buf, ini_str_app2,
+		srv->max_files_number ? "" : "#",		srv->max_files_number ? srv->max_files_number : 0,
+		srv->lua_cpath_org ? "" : "#",			srv->lua_cpath_org ? srv->lua_cpath_org : "dir_name",
+		srv->lua_path_org ? "" : "#",			srv->lua_path_org ? srv->lua_path_org : "dir_name",
+		srv->invoke_dbg_on_crash ? "" : "#",
+		srv->log->use_syslog ? "" : "#",
+		srv->pid_file_org ? "" : "#",			srv->pid_file_org ? srv->pid_file_org : "file_name",
+		srv->plugin_dir_org ? "" : "#",			srv->plugin_dir_org ? srv->plugin_dir_org : "dir_name",
+		srv->user ? "" : "#",					srv->user ? srv->user : "user_name");
+
+	g_string_append(new_str, buf);
+
+// 	if (backends_str)
+// 		g_string_free(backends_str, TRUE);
+// 
+// 	if (r_backends_str)
+// 		g_string_free(r_backends_str, TRUE);
+
+	g_assert (srv->default_file);
+
+	ini_file = fopen(srv->default_file, "w+");
+	if (NULL == ini_file)
+	{
+		g_string_free(new_str, TRUE);
+
+		g_critical("%s: Can't open ini file %s",
+			G_STRLOC, srv->default_file);
+		return EC_ADMIN_RELOAD_WIRTE_FILE_FAIL;
+	}
+
+	if (fprintf(ini_file, new_str->str) < 0)
+		ret = EC_ADMIN_RELOAD_WIRTE_FILE_FAIL;
+	else
+		ret = EC_ADMIN_RELOAD_SUCCESS;
+
+	fclose(ini_file);
+
+	g_string_free(new_str, TRUE);
+
+	return ret;
+}
+
+
+#include "network-address.h"
+
+#define MAX_IP_PORT_STRING_LEN 100
+
+
+struct admin_network_addr_struct 
+{
+	gchar						ip_address[MAX_IP_PORT_STRING_LEN + 1];
+	gint						port;
+	network_address*			addr;
+};
+
+typedef struct admin_network_addr_struct admin_network_addr_t;
+
+static
+void
+admin_print_all_backend_cons(
+	chassis*			srv
+)
+{
+	GPtrArray*				cons;
+	guint					i;
+	network_mysqld_con*		con;
+	guint					invalid_cnt = 0;
+	guint					valid_cnt = 0;
+	gchar*					state_str[] = {
+		"CON_STATE_INIT",
+		"CON_STATE_CONNECT_SERVER", 
+		"CON_STATE_READ_HANDSHAKE", 
+		"CON_STATE_SEND_HANDSHAKE", 
+		"CON_STATE_READ_AUTH",
+		"CON_STATE_SEND_AUTH",
+		"CON_STATE_READ_AUTH_RESULT",
+		"CON_STATE_SEND_AUTH_RESULT",
+		"CON_STATE_READ_AUTH_OLD_PASSWORD", 
+		"CON_STATE_SEND_AUTH_OLD_PASSWORD", 
+		"CON_STATE_READ_QUERY",
+		"CON_STATE_SEND_QUERY",
+		"CON_STATE_READ_QUERY_RESULT",
+		"CON_STATE_SEND_QUERY_RESULT",
+		"CON_STATE_CLOSE_CLIENT", 
+		"CON_STATE_SEND_ERROR",
+		"CON_STATE_ERROR",
+		"CON_STATE_CLOSE_SERVER = 17",
+		"CON_STATE_READ_LOCAL_INFILE_DATA",
+		"CON_STATE_SEND_LOCAL_INFILE_DATA",
+		"CON_STATE_READ_LOCAL_INFILE_RESULT",
+		"CON_STATE_SEND_LOCAL_INFILE_RESULT",
+	};
+
+	cons = srv->priv->cons;
+	g_message("admin_print_all_backend_cons start...");
+	g_mutex_lock(srv->priv->cons_mutex);
+	for (i = 0; i < cons->len; ++i)
+	{
+		con = g_ptr_array_index(cons, i);
+
+		if (con->server && con->server->backend_idx != -1)
+		{
+			if (con->server->disconnect_flag)
+			{
+				invalid_cnt ++;
+				g_message("invalid connection: server: %s/%d, client : %s/%d, state : %s", con->server->dst->name->str, con->server->fd, con->client->src->name->str, con->client->fd, state_str[con->state]);
+			}
+			else
+			{
+				valid_cnt ++;
+				g_message("valid connection: server: %s/%d, client : %s/%d, state : %s", con->server->dst->name->str, con->server->fd, con->client->src->name->str, con->client->fd, state_str[con->state]);
+			}
+		}
+	}
+	g_message("admin_print_all_backend_cons end... connections cnt : %d, invalid cnt : %d, valid cnt %d", cons->len, invalid_cnt, valid_cnt);
+	g_mutex_unlock(srv->priv->cons_mutex);
+	
+}
+
+void
+admin_network_addr_free(
+	gpointer*			addr_ptr						
+)
+{
+	admin_network_addr_t*			addr;
+
+
+	addr	= (admin_network_addr_t*)addr_ptr;
+
+	network_address_free(addr->addr);
+
+	g_free(addr);
+}
+
+static
+gint
+admin_reload_backends(
+	network_mysqld_con*			con,
+	GPtrArray*					backend_addr_str_array,
+	gint						fail_flag
+)
+{
+	chassis*					srv;
+	network_backends_t*			backends;
+	GPtrArray*					cons; 
+	gchar*						s;
+	gchar*						new_backend_addr;
+	guint						i;
+	//gchar						ip_address[MAX_IP_PORT_STRING_LEN + 1];
+	admin_network_addr_t*		addr;	
+	GPtrArray*					addr_array;
+	gint						ret = EC_ADMIN_RELOAD_SUCCESS;
+	gboolean					all_same_flag = 1;
+	guint						server_cnt = 0;
+	guint						client_cnt = 0;
+
+	srv			= con->srv;
+	backends	= srv->priv->backends;
+	cons		= srv->priv->cons;
+
+	//for test
+	if (fail_flag == 1000)
+	{
+		admin_print_all_backend_cons(con->srv);
+		return EC_ADMIN_RELOAD_SUCCESS;
+	}
+
+	if (backend_addr_str_array->len != backends->backends->len)
+	{
+		g_critical("%s: Number of refresh backends num is not matched, new backends :%d, orignal backends : %d",
+					G_STRLOC, backend_addr_str_array->len , backends->backends->len);
+		return EC_ADMIN_RELOAD_FAIL;
+	}
+
+	if (fail_flag != 0 && fail_flag != 1)
+	{
+		g_critical("%s: Fail flag of refresh backends must be 0 or 1, but the flag is %d",
+					G_STRLOC, fail_flag);
+		return EC_ADMIN_RELOAD_FAIL;
+	}
+	
+	addr_array	= g_ptr_array_new();
+
+	/* 1. 测试DR连通性 */
+	for (i = 0; i < backend_addr_str_array->len; ++i)
+	{
+		new_backend_addr = g_ptr_array_index(backend_addr_str_array, i);
+		addr			 = g_new0(admin_network_addr_t, 1);
+		g_ptr_array_add(addr_array, addr);
+
+		s = strchr(new_backend_addr, ':');
+
+		if (NULL != s) 
+		{
+			gint				len;
+			char *				port_err = NULL;
+			network_backend_t*	backend;
+
+			backend = g_ptr_array_index(backends->backends, i);
+
+			//check whether all backends are same
+			//to do check backend:127.0.0.1:3306, addr:ip:3306? 
+			if (all_same_flag && g_strcasecmp(new_backend_addr, backend->addr->name->str) != 0 ||
+					backend->state == BACKEND_STATE_DOWN)
+			{
+				all_same_flag = 0;
+			}
+			
+
+			len = s - new_backend_addr;
+			if (len <=  MAX_IP_PORT_STRING_LEN)
+			{
+				memcpy(addr->ip_address, new_backend_addr, len);
+				addr->ip_address[len] = '\0';
+
+				addr->port = strtoul(s + 1, &port_err, 10);
+			}
+
+			if (len > MAX_IP_PORT_STRING_LEN ||
+					*(s + 1) == '\0') 
+			{
+				g_critical("%s: Reload IP-address has to be in the form [<ip>][:<port>], is '%s'. No port number",
+					G_STRLOC, new_backend_addr);
+				ret = EC_ADMIN_RELOAD_FAIL;
+			} 
+			else if (*port_err != '\0') 
+			{
+				g_critical("%s: Reload IP-address has to be in the form [<ip>][:<port>], is '%s'. Failed to parse the port at '%s'",
+					G_STRLOC, new_backend_addr, port_err);
+				ret = EC_ADMIN_RELOAD_FAIL;
+			} 
+			else 
+			{
+				addr->addr = network_address_new();
+				if (network_address_set_address_ip(addr->addr, addr->ip_address, addr->port))
+				{
+					g_critical("%s: Reload IP-address %s : %d error",
+						G_STRLOC, addr->ip_address, addr->port);
+					ret = EC_ADMIN_RELOAD_FAIL;
+				}
+				//ping the ip address and port;
+				//ret = network_address_set_address_ip(addr, ip_address, port);
+				//to do
+			}
+		}
+		else
+			ret = EC_ADMIN_RELOAD_FAIL;
+		
+		if (EC_ADMIN_RELOAD_FAIL == ret)
+		{
+			g_ptr_array_free_all(addr_array, admin_network_addr_free);
+			return ret;
+		}
+	}
+
+	//backends are same
+	if (all_same_flag)
+	{
+		g_ptr_array_free_all(addr_array, admin_network_addr_free);
+		return EC_ADMIN_RELOAD_SUCCESS;
+	}
+
+	/* 2. 置当前所有backends为down */
+	g_mutex_lock(backends->backends_mutex);
+	for (i = 0; i < backends->backends->len; ++i)
+	{
+		network_backend_t*		backend;
+
+		backend = g_ptr_array_index(backends->backends, i);
+	
+		backend->state = BACKEND_STATE_DOWN;	
+	}
+	g_mutex_unlock(backends->backends_mutex);	
+
+	/* 3. 当前backend为新地址 */
+	g_mutex_lock(backends->backends_mutex);
+	for (i = 0; i < backends->backends->len; ++i)
+	{
+		network_backend_t*		backend;
+
+		backend = g_ptr_array_index(backends->backends, i);
+
+		addr = g_ptr_array_index(addr_array, i);
+
+		network_address_copy(backend->addr, addr->addr);
+
+// 		backend->addr->name->len = 0; /* network refresh name */
+// 
+// 		if (network_address_set_address_ip(backend->addr, addr->ip_address, addr->port))
+// 		{
+// 			g_critical("%s: Reload IP-address %s : %d error"
+// 				G_STRLOC, addr->ip_address, addr->port);
+// 			ret = EC_ADMIN_RELOAD_FAIL;
+// 
+// 			break;
+// 		}
+	}
+	g_mutex_unlock(backends->backends_mutex);
+
+
+	/* 4. 关闭proxy当前所有连接 */
+	g_mutex_lock(srv->priv->cons_mutex);
+	for (i = 0; i < cons->len; ++i)
+	{
+		con = g_ptr_array_index(cons, i);
+
+		//区分了是否为backends的连接
+		if (con->server && con->server->backend_idx != -1)
+		{
+			//g_assert(con->server->fd != -1);
+			if (con->server->fd != -1)
+			{
+				//closesocket(con->server->fd);
+				con->server->fd_bak	= con->server->fd; /* 后端连接暂不关闭，让其正常处理正在进行的事件 */
+				con->server->fd		= -1;
+				con->server->disconnect_flag = 1;
+				server_cnt++;
+			}
+
+			//g_assert(con->client && con->client->fd != -1);
+			if (con->client && con->client->fd != -1)
+			{
+// 				int c_fd = con->client->fd;
+// 				con->client->fd		= -1;
+// 				closesocket(c_fd);						/* 需主动关闭前端fd，防止前端一直等待，但会导致con资源没有释放 */
+				client_cnt++;
+			}
+
+			/* 以上操作可能产生一种情况：客户端请求已在DB执行成功，但前端认为连接已断开 */
+
+			switch(con->state)
+			{
+			case CON_STATE_CLOSE_CLIENT:
+			case CON_STATE_CLOSE_SERVER:
+			case CON_STATE_SEND_ERROR:
+			case CON_STATE_ERROR:
+				break;
+
+			case CON_STATE_INIT:
+			case CON_STATE_CONNECT_SERVER:
+			case CON_STATE_READ_HANDSHAKE:
+			case CON_STATE_SEND_HANDSHAKE:
+			case CON_STATE_READ_AUTH:
+			case CON_STATE_SEND_AUTH:
+			case CON_STATE_READ_AUTH_RESULT:
+			case CON_STATE_SEND_AUTH_RESULT:
+			case CON_STATE_READ_AUTH_OLD_PASSWORD:
+			case CON_STATE_SEND_AUTH_OLD_PASSWORD:
+				break;
+
+			case CON_STATE_READ_QUERY:
+			case CON_STATE_SEND_QUERY:
+				break;
+
+			case CON_STATE_READ_QUERY_RESULT:
+			case CON_STATE_SEND_QUERY_RESULT:
+// 				//需要主动关闭连接
+// 				if (fail_flag == 1)
+// 				{
+// 					if (con->client->fd != -1)
+// 					{
+// 						closesocket(con->client->fd);
+// 						con->client->fd = -1;
+// 					}
+// 				}
+				break;
+
+			case CON_STATE_READ_LOCAL_INFILE_DATA:
+			case CON_STATE_SEND_LOCAL_INFILE_DATA:
+			case CON_STATE_READ_LOCAL_INFILE_RESULT:
+			case CON_STATE_SEND_LOCAL_INFILE_RESULT:
+				break;
+			}
+			
+		}
+	}
+	g_message("%s reload backends: connection count %d, close server count %d, close client count %d",
+				G_STRLOC, srv->priv->cons->len, server_cnt, client_cnt);
+	g_mutex_unlock(srv->priv->cons_mutex);	
+
+	if (ret != EC_ADMIN_RELOAD_SUCCESS)
+		goto destroy_end;
+
+    /* 5. 再把后端状态置为unknown，接收新连接 */
+    g_mutex_lock(backends->backends_mutex);
+    for (i = 0; i < backends->backends->len; ++i)
+    {
+        network_backend_t*		backend;
+
+        backend = g_ptr_array_index(backends->backends, i);
+
+        backend->state = BACKEND_STATE_UNKNOWN;	
+    }
+    g_mutex_unlock(backends->backends_mutex);
+
+	/* 6. 刷新配置 */
+	ret = admin_configure_flush_to_file(srv);
+
+destroy_end:
+	g_ptr_array_free_all(addr_array, admin_network_addr_free);
+	return ret;
+}
+
+static 
+gint
+admin_reload_backends_if_necessary(
+	network_mysqld_con*			con
+)
+{
+	char command = -1;
+	network_socket *recv_sock = con->client;
+	GList   *chunk  = recv_sock->recv_queue->chunks->head;
+	GString *packet = chunk->data;
+
+	if (packet->len < NET_HEADER_SIZE) 
+		return EC_ADMIN_RELOAD_UNKNOWN; /* packet too short */
+
+	command = packet->str[NET_HEADER_SIZE + 0];
+
+#ifdef _VINCHEN_TEST
+    if (COM_QUERY == command)
+    {  
+        gchar*	cmd_str = NULL;
+
+        cmd_str = g_strndup(&packet->str[NET_HEADER_SIZE + 1], packet->len - NET_HEADER_SIZE - 1);
+        printf("query : %s\n", cmd_str);
+
+        g_free(cmd_str);
+    }
+    else
+    {
+        printf("not a query : %d\n", command);
+    }
+#endif // _VINCHEN_TEST
+
+	/* not a query */
+	if (COM_QUERY != command) 
+		return EC_ADMIN_RELOAD_UNKNOWN;
+
+	//刷新配置
+	if (packet->len - NET_HEADER_SIZE - 1 >= sizeof("refresh_backends('1.1.1.1:1')") - 1 &&
+		    0 == g_ascii_strncasecmp(packet->str + NET_HEADER_SIZE + 1, C("refresh_backends('")))
+	{
+		gchar*	back_str;
+		gchar*	p;
+		gchar*	s;
+		gchar*	p_end;
+		gchar*	cmd_str = NULL;
+		gchar	backend_buf[MAX_IP_PORT_STRING_LEN + 1];
+		int		index = 0;
+		GPtrArray*		backend_array;
+		gint	ret;
+		gint	fail_flag;
+		gchar	fail_flag_buf[10];
+		gint	fail_flag_ind = 0;
+		gchar*	fail_flag_err = NULL;
+
+		cmd_str = g_strndup(&packet->str[NET_HEADER_SIZE + 1], packet->len - NET_HEADER_SIZE - 1);
+		back_str = &packet->str[NET_HEADER_SIZE + 1 + sizeof("refrush_backends('") - 1];
+		p = back_str;
+
+		backend_array = g_ptr_array_new();
+
+		p_end = packet->str + packet->len;
+
+		while(p && 
+				*p != '\'' && 
+				p != p_end)
+		{
+			if (MAX_IP_PORT_STRING_LEN == index)
+			{
+				g_critical("%s: Refrush_backends error input %s",
+					G_STRLOC, cmd_str);
+				g_free(cmd_str);
+				g_ptr_array_free_all(backend_array, g_free);
+				return EC_ADMIN_RELOAD_FAIL;
+			}
+			else if (*p == ',')
+			{
+				if (index > 0)
+				{
+					backend_buf[index] = '\0';
+					g_ptr_array_add(backend_array, g_strdup(g_strstrip(backend_buf)));
+				}
+				index = 0;
+				p++;
+
+				continue;
+			}
+			
+			backend_buf[index++] = *(p++);
+		}
+
+		if (index > 0)
+		{
+			backend_buf[index] = '\0';
+			g_ptr_array_add(backend_array, g_strdup(g_strstrip(backend_buf)));
+		}
+
+		if (p == p_end || *p != '\'')
+		{
+			g_ptr_array_free_all(backend_array, g_free);
+			g_critical("%s: Refrush_backends error input %s",
+				G_STRLOC, cmd_str);
+			g_free(cmd_str);
+
+			return EC_ADMIN_RELOAD_FAIL;
+		}
+
+		p++;
+
+		//skip the space, \t 
+		while (p != p_end && g_ascii_isspace(*p))
+			p++;
+
+		if (*p != ',')
+		{
+			g_ptr_array_free_all(backend_array, g_free);
+
+			g_critical("%s: Refrush_backends error input %s",
+				G_STRLOC, cmd_str);
+			g_free(cmd_str);
+
+			return EC_ADMIN_RELOAD_FAIL;
+		}
+
+		p++;
+		
+
+		if (NULL == (s = strchr(p, ')')) || s - p == 0)
+		{
+			g_ptr_array_free_all(backend_array, g_free);
+
+			g_critical("%s: Refrush_backends error input %s",
+				G_STRLOC, cmd_str);
+			g_free(cmd_str);
+
+			return EC_ADMIN_RELOAD_FAIL;
+		}
+
+		memcpy(fail_flag_buf, p, s-p);
+		fail_flag_buf[s-p] = '\0';
+		g_strstrip(fail_flag_buf);
+
+		fail_flag = strtoul(fail_flag_buf, &fail_flag_err, 10);
+		if (fail_flag_err[0] != '\0')
+		{
+			g_critical("%s: IP-address and fail flag has to be in the form Refrush_backends('ip:port[;ip:port..]', fail_flag) %s. Failed to parse the fail_flag at '%s'",
+					G_STRLOC, cmd_str, fail_flag_err);
+			g_free(cmd_str);
+			ret = EC_ADMIN_RELOAD_FAIL;
+
+			return ret;
+		}
+
+		g_critical("%s: Executing %s", G_STRLOC, cmd_str);
+
+		//backend_buf should by ip:port, to be new backend;
+		ret = admin_reload_backends(con, backend_array, fail_flag);
+		
+		g_ptr_array_free_all(backend_array, g_free);
+
+		return ret;
+	}
+
+	return EC_ADMIN_RELOAD_UNKNOWN;
+}
+
+gint
+admin_process_new_conn_if_necessary(
+    network_mysqld_con*			con                         
+)
+{
+    char command = -1;
+    network_socket *recv_sock = con->client;
+    GList   *chunk  = recv_sock->recv_queue->chunks->head;
+    GString *packet = chunk->data;
+
+    if (packet->len < NET_HEADER_SIZE) 
+        return EC_ADMIN_RELOAD_UNKNOWN; /* packet too short */
+
+    command = packet->str[NET_HEADER_SIZE + 0];
+
+    if (COM_INIT_DB == command)
+    {
+        return 0;
+    }
+
+    if (COM_QUERY == command)
+    {
+        gchar*	cmd_str = NULL;
+
+        cmd_str = g_strndup(&packet->str[NET_HEADER_SIZE + 1], packet->len - NET_HEADER_SIZE - 1);
+        
+        if (0 == g_ascii_strncasecmp(cmd_str, C("set autocommit=1")) ||
+            0 == g_ascii_strncasecmp(cmd_str, C("set autocommit=0")))
+        {
+            g_free(cmd_str);
+            return 0;
+        }
+
+        g_free(cmd_str);
+    }
+
+    return -1;
+}
+
+/* end add by vinchen/CFR */
+
 static network_mysqld_lua_stmt_ret admin_lua_read_query(network_mysqld_con *con) {
 	network_mysqld_con_lua_t *st = con->plugin_con_state;
 	char command = -1;
@@ -434,6 +1302,7 @@ NETWORK_MYSQLD_PLUGIN_PROTO(server_read_query) {
 	network_socket *recv_sock, *send_sock;
 	network_mysqld_con_lua_t *st = con->plugin_con_state;
 	network_mysqld_lua_stmt_ret ret;
+	gint						reload_flag = EC_ADMIN_RELOAD_UNKNOWN;
 
 	send_sock = NULL;
 	recv_sock = con->client;
@@ -446,6 +1315,41 @@ NETWORK_MYSQLD_PLUGIN_PROTO(server_read_query) {
 	}
 	
 	packet = chunk->data;
+
+	//add by vinchen/CFR
+	reload_flag = admin_reload_backends_if_necessary(con);
+	if (reload_flag == EC_ADMIN_RELOAD_SUCCESS)
+	{
+		network_mysqld_con_send_ok_full(con->client, 0, 0, 0, 0);
+		g_string_free(g_queue_pop_tail(recv_sock->recv_queue->chunks), TRUE);
+		con->state = CON_STATE_SEND_QUERY_RESULT;
+		return NETWORK_SOCKET_SUCCESS;
+	}
+	else if (reload_flag != EC_ADMIN_RELOAD_UNKNOWN)
+	{
+		switch(reload_flag)
+		{
+		case EC_ADMIN_RELOAD_FAIL:
+			network_mysqld_con_send_error_full(con->client, C("Admin reload backends failed"), 4041, "2800");
+			break;
+
+		case EC_ADMIN_RELOAD_NO_CONS_FILE:
+			network_mysqld_con_send_error_full(con->client, C("Admin reload backends success, but there is no configure file"), 4042, "2800");
+			break;
+
+		case EC_ADMIN_RELOAD_WIRTE_FILE_FAIL:
+			network_mysqld_con_send_error_full(con->client, C("Admin reload backends failed, but write configure file failed"), 4043, "2800");
+			break;
+
+		default:
+			g_assert(0);
+			break;
+		}
+
+		g_string_free(g_queue_pop_tail(recv_sock->recv_queue->chunks), TRUE);
+		con->state = CON_STATE_SEND_QUERY_RESULT;
+		return NETWORK_SOCKET_SUCCESS;
+	}
 
 	ret = admin_lua_read_query(con);
 
@@ -625,6 +1529,7 @@ G_MODULE_EXPORT int plugin_init(chassis_plugin *p) {
 	p->get_options  = network_mysqld_admin_plugin_get_options;
 	p->apply_config = network_mysqld_admin_plugin_apply_config;
 	p->destroy      = network_mysqld_admin_plugin_free;
+    p->get_ini_str  = network_mysqld_admin_plugin_get_ini_str;      //add by vinchen/CFR
 
 	return 0;
 }

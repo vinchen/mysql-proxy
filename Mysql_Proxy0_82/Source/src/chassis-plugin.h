@@ -60,6 +60,7 @@ typedef struct chassis_plugin {
 	GOptionEntry * (*get_options)(chassis_plugin_config *user_data); /**< handler function to obtain the command line argument information */
 	int      (*apply_config)(chassis *chas, chassis_plugin_config * user_data); /**< handler function to set the argument values in the plugin's config */
     void*    (*get_global_state)(chassis_plugin_config *user_data, const char* member);     /**< handler function to retrieve the plugin's global state */
+	void	 (*get_ini_str)(gchar *buf, guint buf_len, chassis_plugin_config *user_data, chassis* srv);		/* get ini str, add by vinchen */
     
 } chassis_plugin;
 

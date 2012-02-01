@@ -55,15 +55,15 @@ typedef struct chassis chassis;
 typedef struct chassis_event_threads_t chassis_event_threads_t;
 
 struct chassis {
-	struct event_base *event_base;
-	gchar *event_hdr_version;
+	struct event_base *event_base;			/* main_thread event_base */
+	gchar *event_hdr_version;				/* libevent version string */
 
-	GPtrArray *modules;                       /**< array(chassis_plugin) */
+	GPtrArray *modules;                     /**< array(chassis_plugin) */
 
 	gchar *base_dir;				/**< base directory for all relative paths referenced */
 	gchar *user;					/**< user to run as */
 
-	chassis_private *priv;
+	chassis_private *priv;			/* connections with client and backends */
 	void (*priv_shutdown)(chassis *chas, chassis_private *priv);
 	void (*priv_free)(chassis *chas, chassis_private *priv);
 
@@ -72,11 +72,27 @@ struct chassis {
 	chassis_stats_t *stats;			/**< the overall chassis stats, includes lua and glib allocation stats */
 
 	/* network-io threads */
-	gint event_thread_count;
+	gint event_thread_count;				/* number of event threads */
 
-	chassis_event_threads_t *threads;
+	chassis_event_threads_t *threads;		/* event thread pool, each thread has a event_base */
 
 	chassis_shutdown_hooks_t *shutdown_hooks;
+
+	/* add by vinchen/CFR, use to write to ini file */
+#ifndef _WIN32
+	int		daemon_mode;				
+	guint	auto_restart;
+#endif
+	gint	max_files_number;
+	gint	invoke_dbg_on_crash;
+	gchar*	pid_file_org;
+	gchar*	plugin_dir_org;
+	gchar*	log_file_name_org;
+	gchar*	lua_path_org;
+	gchar*	lua_cpath_org;
+	gchar*	base_dir_org;
+	gchar*	default_file;
+
 };
 
 CHASSIS_API chassis *chassis_init(void) G_GNUC_DEPRECATED;

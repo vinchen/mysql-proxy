@@ -310,7 +310,7 @@ int chassis_frontend_init_plugin_dir(char **_plugin_dir, const char *base_dir) {
 	if (plugin_dir) return 0;
 
 #ifdef WIN32
-	plugin_dir = g_build_filename(base_dir, "bin", NULL);
+	plugin_dir = g_build_filename(base_dir, "Debug", NULL); //edit by CFR
 #else
 	plugin_dir = g_build_filename(base_dir, "lib", PACKAGE, "plugins", NULL);
 #endif
@@ -431,6 +431,12 @@ int chassis_frontend_init_base_options(GOptionContext *option_ctx,
 	if (FALSE == g_option_context_parse(option_ctx, argc_p, argv_p, gerr)) {
 		ret = -1;
 	}
+
+	//add by CFR, ƒ¨»œ≈‰÷√
+//	if (*config_file == NULL)
+// 	{
+// 		*config_file = g_strdup("./mysql_proxy.ini");
+// 	}	
 
 	/* do not use chassis_options_free_g_options... here, we need to hang on to the data until the end of the program! */
 	g_free(base_main_entries);

@@ -83,6 +83,15 @@ int chassis_check_version(const char *lib_version, const char *hdr_version) {
 		return -1;
 	}
 	
+	/*
+		add by vinchen/CFR, must be 2.0 or higher, to be thread-safe
+	*/
+	if (lib_maj < 2)
+	{
+		return -1;
+	}
+	
+	
 	if (lib_maj == hdr_maj &&
 	    lib_min == hdr_min &&
 	    lib_pat >= hdr_pat) {
@@ -91,7 +100,33 @@ int chassis_check_version(const char *lib_version, const char *hdr_version) {
 
 	return -1;
 }
+/*
+	add by vinchen/CFR
+	to declare libevent api evthread_use_windows_threads()/evthread_use_pthreads()
+*/
+#include "event2/thread.h"
 
+/* 
+	add by vinchen/CFR 
+	libevent to be thread_safe
+	https://raw.github.com/libevent/libevent/patches-2.0/whatsnew-2.0.txt
+*/
+int chassis_libevent_init()
+{
+	int ret;
+
+#ifdef WIN32
+	ret = evthread_use_windows_threads();
+#else
+	ret = evthread_use_pthreads();
+#endif
+
+#ifdef _VINCHEN_TEST
+	g_message("libevent version is %s\n", event_get_version());
+#endif // _VINCHEN_TEST
+
+	return ret;
+}
 
 /**
  * create a global context
@@ -102,6 +137,13 @@ chassis *chassis_new() {
 	if (0 != chassis_check_version(event_get_version(), _EVENT_VERSION)) {
 		g_critical("%s: chassis is build against libevent %s, but now runs against %s",
 				G_STRLOC, _EVENT_VERSION, event_get_version());
+		return NULL;
+	}
+	
+	/* add by vinchen/CFR£¬init libevent to be thread_safe */
+	if (0 != chassis_libevent_init()){
+		g_critical("%s: chassis_libevent_init error, libevent version : %s",
+				G_STRLOC, event_get_version());
 		return NULL;
 	}
 
@@ -189,6 +231,22 @@ void chassis_free(chassis *chas) {
 	g_free(chas->event_hdr_version);
 
 	chassis_shutdown_hooks_free(chas->shutdown_hooks);
+
+	//add by vinchen/CFR
+	if (chas->base_dir_org)
+		g_free(chas->base_dir_org);
+	if (chas->lua_cpath_org)
+		g_free(chas->lua_cpath_org);
+	if (chas->lua_path_org)
+		g_free(chas->lua_path_org);
+	if (chas->log_file_name_org)
+		g_free(chas->log_file_name_org);
+	if (chas->plugin_dir_org)
+		g_free(chas->plugin_dir_org);
+	if (chas->pid_file_org)
+		g_free(chas->pid_file_org);
+	if (chas->default_file)
+		g_free(chas->default_file);
 	
 	g_free(chas);
 }
@@ -251,6 +309,8 @@ int chassis_mainloop(void *_chas) {
 	mainloop_thread = chassis_event_thread_new();
 	chassis_event_threads_init_thread(chas->threads, mainloop_thread, chas);
 	chassis_event_threads_add(chas->threads, mainloop_thread);
+
+	//add by Vinchn
 
 	chas->event_base = mainloop_thread->event_base; /* all global events go to the 1st thread */
 

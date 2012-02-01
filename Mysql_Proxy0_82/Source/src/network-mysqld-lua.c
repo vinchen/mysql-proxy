@@ -547,6 +547,13 @@ void network_mysqld_lua_init_global_fenv(lua_State *L) {
 	DEF(MYSQL_TYPE_BIT);
 #endif
 
+//add by CFR
+#ifdef _WIN32
+#ifndef PACKAGE_VERSION_ID
+#define PACKAGE_VERSION_ID 1
+#endif
+#endif
+
 	/* cheat with DEF() a bit :) */
 #define PROXY_VERSION PACKAGE_VERSION_ID
 	DEF(PROXY_VERSION);

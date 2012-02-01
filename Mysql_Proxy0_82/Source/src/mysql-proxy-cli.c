@@ -319,6 +319,7 @@ int main_cmdline(int argc, char **argv) {
 	}
 
 	if (frontend->default_file) {
+		srv->default_file = g_strdup(frontend->default_file); //add by vinchen/CFR
 		if (!(frontend->keyfile = chassis_frontend_open_config_file(frontend->default_file, &gerr))) {
 			g_critical("%s: loading config from '%s' failed: %s",
 					G_STRLOC,
@@ -364,6 +365,9 @@ int main_cmdline(int argc, char **argv) {
 		}
 	}
 
+	//add by vinchen/CFR
+	if (frontend->base_dir != NULL)
+		srv->base_dir_org = g_strdup(frontend->base_dir);
 
 	if (chassis_frontend_init_basedir(argv[0], &(frontend->base_dir))) {
 		GOTO_EXIT(EXIT_FAILURE);
@@ -393,6 +397,8 @@ int main_cmdline(int argc, char **argv) {
 	sigsegv_sa.sa_handler = sigsegv_handler;
 	sigemptyset(&sigsegv_sa.sa_mask);
 
+	srv->invoke_dbg_on_crash = frontend->invoke_dbg_on_crash;	//add by vinchen/CFR
+
 	if (frontend->invoke_dbg_on_crash && !(RUNNING_ON_VALGRIND)) {
 		sigaction(SIGSEGV, &sigsegv_sa, NULL);
 	}
@@ -403,6 +409,18 @@ int main_cmdline(int argc, char **argv) {
 	 * where they open files, hence we must make it available
 	 */
 	srv->base_dir = g_strdup(frontend->base_dir);
+
+	if (frontend->plugin_dir)			//vinchen/CFR
+		srv->plugin_dir_org = g_strdup(frontend->plugin_dir);
+	if (frontend->pid_file)
+		srv->pid_file_org	= g_strdup(frontend->pid_file);
+	if (frontend->log_filename)
+		srv->log_file_name_org	= g_strdup(frontend->log_filename);
+	if (frontend->lua_path)
+		srv->lua_path_org		= g_strdup(frontend->lua_path);
+	if (frontend->lua_cpath)
+		srv->lua_cpath_org		= g_strdup(frontend->lua_cpath);
+	srv->max_files_number	= frontend->max_files_number;
 
 	chassis_frontend_init_plugin_dir(&frontend->plugin_dir, srv->base_dir);
 	
@@ -472,10 +490,14 @@ int main_cmdline(int argc, char **argv) {
 				"mysql-proxy",
 				srv->base_dir,
 				&gerr)) {
-		g_critical("%s: %s",
+
+		//edit bug for gerr should by null by vinchen/CFR
+		if (gerr != NULL) {
+			g_critical("%s: %s",
 				G_STRLOC, 
 				gerr->message);
-		g_clear_error(&gerr);
+			g_clear_error(&gerr);
+		}
 
 		GOTO_EXIT(EXIT_FAILURE);
 	}
@@ -532,6 +554,9 @@ int main_cmdline(int argc, char **argv) {
 	
 #ifndef _WIN32	
 	signal(SIGPIPE, SIG_IGN);
+
+	srv->daemon_mode  = frontend->daemon_mode;			/* add by vinchen/CFR */
+	srv->auto_restart = frontend->auto_restart;
 
 	if (frontend->daemon_mode) {
 		chassis_unix_daemonize();

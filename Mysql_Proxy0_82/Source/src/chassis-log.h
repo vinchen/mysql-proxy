@@ -62,6 +62,7 @@ typedef struct {
 CHASSIS_API chassis_log *chassis_log_init(void) G_GNUC_DEPRECATED;
 CHASSIS_API chassis_log *chassis_log_new(void);
 CHASSIS_API int chassis_log_set_level(chassis_log *log, const gchar *level);
+CHASSIS_API char* chassis_log_get_level_name(int	log_level);		//add by vinchen/CFR
 CHASSIS_API void chassis_log_free(chassis_log *log);
 CHASSIS_API int chassis_log_open(chassis_log *log);
 CHASSIS_API void chassis_log_func(const gchar *log_domain, GLogLevelFlags log_level, const gchar *message, gpointer user_data);
