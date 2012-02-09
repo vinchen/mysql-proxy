@@ -17683,11 +17683,11 @@ cat >>conftest.$ac_ext <<_ACEOF
 #ifdef __cplusplus
 extern "C"
 #endif
-char event_init ();
+//char event_init ();
 int
 main ()
 {
-return event_init ();
+//return event_init ();
   ;
   return 0;
 }
@@ -17729,7 +17729,7 @@ fi
 { $as_echo "$as_me:$LINENO: result: $ac_cv_lib_event_event_init" >&5
 $as_echo "$ac_cv_lib_event_event_init" >&6; }
 if test "x$ac_cv_lib_event_event_init" = x""yes; then
-  EVENT_LIBS="-levent"
+  EVENT_LIBS="-L/usr/local/mysql-proxy-0.82/libevent-2.0.15-stable/lib -levent -levent_pthreads"
 else
   { { $as_echo "$as_me:$LINENO: error: libevent is required" >&5
 $as_echo "$as_me: error: libevent is required" >&2;}
@@ -17756,11 +17756,11 @@ cat >>conftest.$ac_ext <<_ACEOF
 #ifdef __cplusplus
 extern "C"
 #endif
-char event_base_new ();
+/*char event_base_new (); */
 int
 main ()
 {
-return event_base_new ();
+//return event_base_new ();
   ;
   return 0;
 }
